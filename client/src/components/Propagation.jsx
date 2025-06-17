@@ -20,7 +20,7 @@ import {
   Alert,
   CircularProgress
 } from "@mui/material";
-
+import IPAddress from './IPAddress';
 export default function Propagation() {
   const [domain, setDomain] = useState('');
   const [result, setResult] = useState(null);
@@ -30,6 +30,7 @@ export default function Propagation() {
   const [SnackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('info');
 const [openModal, setOpenModal] = useState(false)
+const [openIP, setOpenIP] = useState(false);
   const check = async () => {
     if (!domain.trim()) {
       setSnackbarOpen(true);
@@ -54,7 +55,10 @@ const [openModal, setOpenModal] = useState(false)
       setLoading(false);
     }
   };
-
+const handleClose=()=>
+{
+  setOpenIP(false)
+}
   return (
     <>
       <div className='banner'>
@@ -71,20 +75,45 @@ const [openModal, setOpenModal] = useState(false)
       </div>
 
       <div className='body-content'>
-        <Box sx={{ display: 'flex', gap: '10px', mt: 5, justifyContent: 'end', flexWrap: 'wrap' }}>
+      
+        <Box sx={{ display: 'flex', gap: '10px', mt: 5, justifyContent: 'end', flexWrap: 'wrap', flexDirection:'column' }}>
+        
+        {/* flex container */}
+        
+        <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+
+         {/* ip button */}
+
+         <Button onClick={()=>setOpenIP(true)}>IP Info Tool</Button>
+      
+      {/* for opening the ip tool */}
+       
+        {openIP&&(
+          <IPAddress handleOnClose={handleClose}/>
+        )}
+      
+      
+        {/* input filed button n select field flex container */}
+
+
+         <div style={{display:'flex', flexDirection:'row', gap:'10px'}}>
+
           <TextField
-            type="text"
-            label='Domain'
-            value={domain}
-            onChange={(e) => setDomain(e.target.value)}
-            placeholder="Enter domain e.g. example.com"
-            sx={{ maxWidth: '400px', width: '100%' }}
-          />
+         
+         type="text"
+         label='Domain'
+         value={domain}
+         onChange={(e) => setDomain(e.target.value)}
+         placeholder="Enter domain e.g. example.com"
+         sx={{ maxWidth: '400px', width: '100%' }}
+         />
+        
+        {/* select container */}
           <Select
             value={recordType}
             onChange={(e) => setRecordType(e.target.value)}
             sx={{ minWidth: 120 }}
-          >
+            >
             <MenuItem value='A'>A</MenuItem>
             <MenuItem value='AAAA'>AAAA</MenuItem>
             <MenuItem value='CNAME'>CNAME</MenuItem>
@@ -92,13 +121,17 @@ const [openModal, setOpenModal] = useState(false)
             <MenuItem value='NS'>NS</MenuItem>
             <MenuItem value='TXT'>TXT</MenuItem>
           </Select>
-          <Button
+        
+      {/* searc button */}
+        <Button
             onClick={check}
             style={{ padding: '10px 20px' }}
             sx={{ background: '#007BFF', color: 'white' }}
-          >
+            >
             {loading ? 'Checking...' : 'Check'}
           </Button>
+              </div>
+            </div>
         </Box>
 
         <br />
@@ -118,6 +151,11 @@ const [openModal, setOpenModal] = useState(false)
               </Box>
             ) : result ? (
               <>
+            
+            
+               {/* table part */}
+
+
                 <Box sx={{ width: { xs: '100%', md: '50%' } }}>
                   <TableContainer component={Paper} sx={{
                     fontSize:'16px'
@@ -146,6 +184,11 @@ const [openModal, setOpenModal] = useState(false)
 
                   <br />
 <Button onClick={() => setOpenModal(true)} sx={{ mt: 2, backgroundColor:'#FE791A' , color:'white' }}>See Blacklist</Button>
+
+
+
+ {/* blacklist part */}
+
 
 {openModal && result.blacklist?.length > 0 && (
     <Box sx={{zIndex:1000, position:'absolute', display:'flex', top:0, left:0, width:'100%', overflowX:'hidden'}}>
@@ -185,7 +228,10 @@ const [openModal, setOpenModal] = useState(false)
 
                     
                 </Box>
-{!openModal && (
+                
+                {/* map part */}
+          
+{!openModal && !openIP && (
   <Box sx={{ width: { xs: '100%', md: '50%' } }}>
     {result && <Mapview data={result.Propagation} />}
   </Box>

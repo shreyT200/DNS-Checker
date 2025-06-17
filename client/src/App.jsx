@@ -1,20 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Porpagation from './components/Propagation'
 import './App.css'
-import IPAddress from './components/IPAddress'
+import { Button, Box } from '@mui/material'
+// import IPAddress from './components/IPAddress'
 export default function App() {
-  const [openModal, setOpenModal] = useState(false);
-const handleOnClose =()=>{
-  setOpenModal(false)
-}
+
   return (
     <>
-      <Porpagation/>
-  <button onClick={()=> setOpenModal(true)} >Ip Info tool</button>
+<Box sx={{display:'flex', flexDirection:'column'}}>
+
+<Porpagation/>
+  {/* <Button sx={{
+    backgroundColor:'#007BFF',
+    color:'white',
+    width:'200px'
+  }} onClick={()=> setOpenModal(true)} >Ip Info tool</Button>
     {openModal&&(
       
       <IPAddress handleOnClose={handleOnClose}/>
-    )}
+    )} */}
+    </Box>
     </>
   )
 }
