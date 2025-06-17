@@ -18,7 +18,7 @@ app.get('/api/ipinfo', async (req, res) => {
     let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     ip = ip.split(',')[0].replace(/^.*:/, '') || '8.8.8.8';
 
-    const token = process.env.VITE_IPINFO_TOKEN;
+const token = process.env.IPINFO_TOKEN;
     if (!token) {
       return res.status(500).json({ error: 'Missing API token' });
     }
