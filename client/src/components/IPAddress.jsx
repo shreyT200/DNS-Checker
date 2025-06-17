@@ -40,65 +40,68 @@ const [clientIp, setClientIp] = useState('');
 const [inputIp, setInputIp] = useState('');
 
 
-useEffect(()=>{
-  axios.get('https://api.ipify.org?format=json')
-  .then(resp=>{
-    setClientIp(resp.data.ip);
-    fetchInfo(resp.data.ip);
-  })
-  .catch(()=>{
-    setSnackbarOpen(true);
-    setSnackbarMessage('Could not detect your ip')
-    setSnackbarSeverity('error');
-  })
-},[]);
+useEffect(() => {
+  axios.get('http://localhost:8000/api/ipinfo') // Replace with your deployed domain in prod
+    .then(resp => {
+      setClientIp(resp.data.ip);
+      const [lat, lng] = resp.data.loc.split(',').map(Number);
+
+      setInfo({
+        ip: resp.data.ip,
+        city: resp.data.city,
+        region: resp.data.region,
+        country: resp.data.country,
+        org: resp.data.org,
+        coords: [lat, lng],
+        postal: resp.data.postal,
+        timezone: resp.data.timezone,
+      });
+    })
+    .catch(() => {
+      setSnackbarOpen(true);
+      setSnackbarMessage('Could not detect your IP');
+      setSnackbarSeverity('error');
+    });
+}, []);
+
 
 
   const isValidIp = ip => /^(25[0-5]|2[0-4]\d|[01]?\d?\d)(\.(25[0-5]|2[0-4]\d|[01]?\d?\d)){3}$/.test(ip);
 
-  const fetchInfo = async(ip) => {
-    
-    if (!isValidIp(ip)) {
-     setSnackbarOpen(true);
-      setSnackbarMessage('Please enter a valid IPV4');
-    setSnackbarSeverity('error')
-      return;
-    }
-    setLoading(true);
-    
-    try {
-      // const token = import.meta.env.VITE_IP_API_KEY;
-      const { data } = await axios.get(`http://localhost:8000/api/ipinfo/${ip}`);
-     if(!data.loc){
-      throw new Error('Location not available in IP fopr info')
-     } 
-      const [lat, lng] = data.loc.split(',').map(Number);
-      
-      
-      setInfo({
-        ip: data.ip,
-        city: data.city,
-        region: data.region,
-        country: data.country,
-        org: data.org,
-        coords: [lat, lng],
-        postal: data.postal,
-        timezone:data.timezone,
-      });
-            
-            setError(null);
-        }
-        
-        catch (err) {
-            setSnackbarOpen(true);
-            setSnackbarMessage('Failed fetching IP info');
-            setSnackbarSeverity('error')
-            console.error(err);
-        }finally{
+ const fetchInfo = async (ip) => {
+  if (!isValidIp(ip)) {
+    setSnackbarOpen(true);
+    setSnackbarMessage('Please enter a valid IPv4');
+    setSnackbarSeverity('error');
+    return;
+  }
 
-            setLoading(false)
-        }
-  };
+  setLoading(true);
+
+  try {
+    const { data } = await axios.get(`http://localhost:8000/api/ipinfo/${ip}`);
+    const [lat, lng] = data.loc.split(',').map(Number);
+    setInfo({
+      ip: data.ip,
+      city: data.city,
+      region: data.region,
+      country: data.country,
+      org: data.org,
+      coords: [lat, lng],
+      postal: data.postal,
+      timezone: data.timezone,
+    });
+    setError(null);
+  } catch (err) {
+    setSnackbarOpen(true);
+    setSnackbarMessage('Failed fetching IP info');
+    setSnackbarSeverity('error');
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <>
@@ -122,7 +125,7 @@ useEffect(()=>{
     flexDirection:'column',
     gap:'20px'
   }}>
-<div>
+<div >
 <div className='a'>
   
     <div style={{alignContent:'center', justifyContent:'end', display:'flex', width:'100%'}}>
@@ -135,6 +138,7 @@ useEffect(()=>{
   }}>
   <h2 style={{textAlign:'center'}}>Enter IP Address</h2>
      <br/>
+   
       <input
       // variant='filled'
       // label='Enter Ip Address'
@@ -164,14 +168,15 @@ useEffect(()=>{
         
        
 {loading ? (
-  <Box sx={{
-    textAlign: 'center',
-    position: 'absolute',
-    top: '60%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '40vh',
-    width: '100%',
+
+ <Box sx={{
+   textAlign: 'center',
+   position: 'absolute',
+   top: '60%',
+   alignItems: 'center',
+   justifyContent: 'center',
+   minHeight: '40vh',
+   width: '100%',
    
   }}>
         <CircularProgress />
