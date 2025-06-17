@@ -21,6 +21,9 @@
     height: 25px;
     padding: 5px;
     transition: 0.3s;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid black;
  
  
     
@@ -28,7 +31,70 @@
 }
 .input-ip:focus{
     outline: none;
-    background-color: #e2e2e2;
+    background-color: #cdd9e993;
     border: none;
-   border-block-end: 2px solid #006eff;
+   border-block-end: 2px solid #007bff;
+}
+.ip-btn{
+    transition: 0.3s;
+    border-radius: 5px;
+    width: 150px;
+
+}
+.ip-btn:hover{
+color: black;
+cursor: pointer;
+
+}
+.ip-btn:active{
+    transform: scale(0.9);
+}
+.field-dns{
+    flex-direction: row;
+    align-items: center;
+
+}
+@media screen and (max-width: 600px) {
+    .field-dns{
+        flex-direction: column;
+    }
+    .ip-btn{
+        width: 100px;
+    }
+    .c{
+        font-size: 10px;
+    }
+    .b{
+        max-width: 500px;
+        width: 100%;
+    }
+    
+}
+.search-btn{
+    width: 150px;
+    height: 50px;
+    text-align: center;
+}
+.a{
+   display: flex;
+   flex-direction: column;
+   
+}
+.b{
+    border-top: 5px solid blue;
+    max-width: 900px;
+    width: 100%;
+    
+    padding: 20px;
+
+    align-content: center;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+}
+.c{
+    border-bottom: 1px solid black;
+    font-size: larger;
+}
+.c img{
+    width: 20px;
+    align-content: center;
 }

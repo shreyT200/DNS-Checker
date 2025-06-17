@@ -80,11 +80,11 @@ const handleClose=()=>
         
         {/* flex container */}
         
-        <div style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+        <div style={{display:'flex', flexDirection:{xs:'column', md:'row'}, justifyContent:'space-between'}}>
 
          {/* ip button */}
 
-         <Button onClick={()=>setOpenIP(true)}>IP Info Tool</Button>
+         <button className='ip-btn' style={{backgroundColor:'#007BFF' ,color:'white', height:'30px', border:'none'}} onClick={()=>setOpenIP(true)}>IP Info Tool</button>
       
       {/* for opening the ip tool */}
        
@@ -96,7 +96,7 @@ const handleClose=()=>
         {/* input filed button n select field flex container */}
 
 
-         <div style={{display:'flex', flexDirection:'row', gap:'10px'}}>
+         <div className='field-dns' style={{display:'flex', gap:'10px'}}>
 
           <TextField
          
@@ -110,9 +110,12 @@ const handleClose=()=>
         
         {/* select container */}
           <Select
+
             value={recordType}
             onChange={(e) => setRecordType(e.target.value)}
-            sx={{ minWidth: 120 }}
+            sx={{
+              minWidth:'200px'
+            }}
             >
             <MenuItem value='A'>A</MenuItem>
             <MenuItem value='AAAA'>AAAA</MenuItem>
@@ -123,13 +126,13 @@ const handleClose=()=>
           </Select>
         
       {/* searc button */}
-        <Button
+        <button className='search-btn'
             onClick={check}
             style={{ padding: '10px 20px' }}
             sx={{ background: '#007BFF', color: 'white' }}
             >
             {loading ? 'Checking...' : 'Check'}
-          </Button>
+          </button>
               </div>
             </div>
         </Box>

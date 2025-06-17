@@ -9,6 +9,11 @@ import {TextField, Button, Box, Paper, Table, TableBody, TableCell, TableHead, T
 import {Snackbar, Alert} from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress';
 import './all.css'
+import loc from '../assest/marker.png'
+import region from '../assest/land-location.png'
+import timezone from '../assest/icons8-timezone-100.png'
+import post from '../assest/icons8-postal-100.png'
+import org from '../assest/icons8-organization-96.png'
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon-2x.png',
@@ -77,6 +82,8 @@ useEffect(()=>{
         country: data.country,
         org: data.org,
         coords: [lat, lng],
+        postal: data.postal,
+        timezone:data.timezone,
       });
             
             setError(null);
@@ -95,49 +102,67 @@ useEffect(()=>{
 
   return (
     <>
-    <Box sx={{
+    <Box component={Paper} sx={{
       display:'flex',
-      flexDirection:"column",
+      flexDirection:'column',
       gap:'15px',
       position:'absolute',
       top:0,
       left:0,
       width:'100%',
       zIndex:1000,
-     
+      
    
       
 
     }}>
-      <Box component={Paper} sx={{padding:'10px',
+      <Box  sx={{
     height:'100vh',
     display:'flex',
     flexDirection:'column',
     gap:'20px'
   }}>
-
-<div style={{display:'flex' , justifyContent:'space-between'}}>
-
-  <div style={{display:'flex', gap:'5px', alignItems:'center' }}>
+<div>
+<div className='a'>
+  
+    <div style={{alignContent:'center', justifyContent:'end', display:'flex', width:'100%'}}>
+      
+      <Button sx={{alignItems: 'flex-start'}} onClick={handleOnClose} >❌</Button>
+    </div>
+<div style={{display:'flex', width:'100%', justifyContent:'center' }}>
+  <div className='b' style={{display:'flex', gap:'5px', flexDirection:'column', alignItems:'center', justifyContent:'center',  backgroundColor:'white',  
+   justifySelf:'center', borderRadius:'15px',marginTop:'10px'
+  }}>
+  <h2 style={{textAlign:'center'}}>Enter IP Address</h2>
+     <br/>
       <input
       // variant='filled'
       // label='Enter Ip Address'
-        type="text"
-      placeholder='Enter Ip Address'
+      type="text"
+      placeholder='IP'
       className='input-ip'
-        
-        value={inputIp}
-        onChange={e => setInputIp(e.target.value)}
-        />
+      style={{
+        width:'100%'
+      }}
+      value={inputIp}
+      onChange={e => setInputIp(e.target.value)}
+      />
+      <br/>
       <Button onClick={()=>fetchInfo(inputIp)} sx={{
         backgroundColor:'#007BFF',
         color:'white',
-        height:'30px'
+        height:'30px',
+        width:'100%',
+        fontSize:{xs:'10px', md:'medium'}
       }}>Get IP Info</Button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
+      </div> 
         </div>
-        <Button onClick={handleOnClose} >❌</Button>
         </div>
+      </div>
+
+        
+       
 {loading ? (
   <Box sx={{
     textAlign: 'center',
@@ -150,43 +175,47 @@ useEffect(()=>{
    
   }}>
         <CircularProgress />
+        
     </Box>
       ): info ? (
-  <Box sx={{display:'flex', flexDirection:'column', gap:'10px'}}>
-<TableContainer component={Paper}>
-  <Table>
-    <TableHead sx={{backgroundColor:'black'}}>
-      <TableCell   align='center' sx={{color:'white'}}>IP</TableCell>
-      <TableCell   align='center' sx={{color:'white'}}>City</TableCell>
-      <TableCell   align='center' sx={{color:'white'}}>Region</TableCell>
-      <TableCell   align='center' sx={{color:'white'}}>Country</TableCell>
-      <TableCell   align='center' sx={{color:'white'}}>Org</TableCell>
-    </TableHead>
-      <TableBody>
-      <TableRow>
-          <TableCell align='center' >{info.ip}</TableCell>
-        <TableCell align='center' >{info.city}</TableCell>
-        <TableCell align='center' >{info.region}</TableCell>
-        <TableCell align='center' >{info.country}</TableCell>
-        <TableCell align='center' >{info.org}</TableCell>
-      </TableRow>
-    </TableBody>
-  </Table>
-</TableContainer>
-          {/* <p><b>IP:</b> {info.ip}</p>
-          <p><b>City:</b> {info.city}</p>
-          <p><b>Region:</b> {info.region}</p>
-          <p><b>Country:</b> {info.country}</p>
-          <p><b>Org:</b> {info.org}</p> */}
-          
-          <div style={{ height: 600, width: '100%',  border:'2px solid black' }}>
-        
+        <div style={{
+          padding:'20px'
+        }}>
 
+        <Box sx={{display:'flex', flexDirection:{xs:'column', md:'row'}, gap:'10px', padding:'5px'}}>
+<Box sx={{
+  padding:'10px',
+  width:'100%',
+  boxShadow:'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+  
+}}>
+  
+          <p className='c'><span><img src={loc} alt='loc'/> </span><b>IP:</b> {info.ip}</p>
+          <br/>
+          <p className='c'><span><img src={loc} alt='loc'/> </span><b>City:</b> {info.city}</p>
+          <br/>
+          <p className='c'><span><img src={region} alt='img'/> </span><b>Region:</b> {info.region}</p>
+          <br/>
+<p className='c'> <b>Country:</b> {info.country}<span><img src={`https://flagcdn.com/24x18/${info.country.toLowerCase()}.png`} alt={info.country}/></span> </p>         
+ <br/>
+ <p className='c'><span><img src={org} alt='img' /> </span><b>Org:</b> {info.org}</p>
+ <br/>
+
+ <p className='c'><span><img src ={post} alt='img'/></span> <b>Postal-Code:</b> {info.postal}</p>
+ <br/>
+ <p className='c'><span><img src={timezone} alt ='img'/> </span><b>Time-Zone:</b> {info.timezone}</p>
+
+  </Box>
+          
+          <div style={{ width: '100%',  border:'2px solid black', height:'500px' }}>
+          
+        
+<></>
             <MapContainer
               center={info.coords}
               zoom={15}
               scrollWheelZoom={false}
-              style={{ height: '100%', width: '100%' }}
+              style={{ height:'100%', width: '100%' }}
               >
               <FixMapSize />
               <TileLayer
@@ -208,6 +237,7 @@ useEffect(()=>{
             </MapContainer>
           </div>
         </Box>
+                    </div>
                 ): null}
    
 
