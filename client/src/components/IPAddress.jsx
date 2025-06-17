@@ -156,19 +156,19 @@ useEffect(()=>{
 <TableContainer component={Paper}>
   <Table>
     <TableHead sx={{backgroundColor:'black'}}>
-      <TableCell sx={{color:'white'}}>IP</TableCell>
-      <TableCell sx={{color:'white'}}>City</TableCell>
-      <TableCell sx={{color:'white'}}>Region</TableCell>
-      <TableCell sx={{color:'white'}}>Country</TableCell>
-      <TableCell sx={{color:'white'}}>Org</TableCell>
+      <TableCell   align='center' sx={{color:'white'}}>IP</TableCell>
+      <TableCell   align='center' sx={{color:'white'}}>City</TableCell>
+      <TableCell   align='center' sx={{color:'white'}}>Region</TableCell>
+      <TableCell   align='center' sx={{color:'white'}}>Country</TableCell>
+      <TableCell   align='center' sx={{color:'white'}}>Org</TableCell>
     </TableHead>
-    <TableBody>
+      <TableBody>
       <TableRow>
-        <TableCell>{info.ip}</TableCell>
-        <TableCell>{info.city}</TableCell>
-        <TableCell>{info.region}</TableCell>
-        <TableCell>{info.country}</TableCell>
-        <TableCell>{info.org}</TableCell>
+          <TableCell align='center' >{info.ip}</TableCell>
+        <TableCell align='center' >{info.city}</TableCell>
+        <TableCell align='center' >{info.region}</TableCell>
+        <TableCell align='center' >{info.country}</TableCell>
+        <TableCell align='center' >{info.org}</TableCell>
       </TableRow>
     </TableBody>
   </Table>
