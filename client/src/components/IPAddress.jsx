@@ -68,7 +68,7 @@ useEffect(()=>{
     
     try {
       // const token = import.meta.env.VITE_IP_API_KEY;
-      const { data } = await axios.get(`${import.meta.VITE_BACKEND_URL}/api/ipinfo/${ip}`);
+const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo/${ip}`);
      if(!data.loc){
       throw new Error('Location not available in IP fopr info')
      } 
