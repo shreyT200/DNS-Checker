@@ -162,7 +162,7 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
       />
       <br/>
       <Button onClick={()=>fetchInfo(inputIp)} sx={{
-        backgroundColor:'#007BFF',
+        backgroundColor:'#FE791A',
         color:'white',
         height:'30px',
         width:'100%',
