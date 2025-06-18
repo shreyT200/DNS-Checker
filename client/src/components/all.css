@@ -65,8 +65,8 @@ cursor: pointer;
         font-size: 10px;
     }
     .b{
-        max-width: 500px;
-        width: 100%;
+        min-width: 400px;
+        
     }
     .search-btn{
           width: 150px;
@@ -109,4 +109,12 @@ cursor: pointer;
 .search-btn:active{
     transform: scale(0.9);
 
+}
+.map-btn{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    color: red;
+    font-weight: bold;
 }

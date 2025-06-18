@@ -253,7 +253,7 @@ sx={{
                 
                 {/* map part */}
           
-{!openModal && !openIP && (
+{!openModal && !openIP && !Propagation && (
   <Box sx={{ width: { xs: '100%', md: '50%' } }}>
     {result && <Mapview data={result.Propagation} />}
   </Box>

@@ -14,6 +14,8 @@ import region from '../assest/land-location.png'
 import timezone from '../assest/icons8-timezone-100.png'
 import post from '../assest/icons8-postal-100.png'
 import org from '../assest/icons8-organization-96.png'
+import map from '../assest/land-location.png';
+
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon-2x.png',
@@ -38,6 +40,15 @@ const [snackbarMessage, setSnackbarMessage] = useState('');
 const [SnackbarOpen, setSnackbarOpen] = useState(false);
 const [clientIp, setClientIp] = useState('');
 const [inputIp, setInputIp] = useState('');
+const [openIpMap, setOpenIpMap]= useState(false);
+
+const handleMapClick = ()=>{
+  setOpenIpMap(true)
+  if(openIpMap === true){
+    setOpenIpMap(false)
+  }
+
+}
 
 
 useEffect(()=>{
@@ -184,7 +195,7 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
           padding:'20px'
         }}>
 
-        <Box sx={{display:'flex', flexDirection:{xs:'column', md:'row'}, gap:'10px', padding:'5px'}}>
+        <Box sx={{display:'flex', flexDirection:{xs:'row', md:'row'}, gap:'10px', padding:'5px'}}>
 <Box sx={{
   padding:'10px',
   width:'100%',
@@ -206,39 +217,48 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
  <p className='c'><span><img src ={post} alt='img'/></span> <b>Postal-Code:</b> {info.postal}</p>
  <br/>
  <p className='c'><span><img src={timezone} alt ='img'/> </span><b>Time-Zone:</b> {info.timezone}</p>
-
-  </Box>
-          
-          <div style={{ width: '100%',  border:'2px solid black', height:'500px' }}>
+<br/>
+<span><img style={{width:20}} src={map} alt='map'/> </span><button className='map-btn'onClick={ handleMapClick}>Map</button>
           
         
-<></>
-            <MapContainer
-              center={info.coords}
-              zoom={15}
-              scrollWheelZoom={false}
-              style={{ height:'100%', width: '100%' }}
-              >
-              <FixMapSize />
-              <TileLayer
-                attribution='&copy; OpenStreetMap'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-              <Marker position={info.coords}>
-                <Popup>
-                  {info.city}, {info.region}<br/>
-                  {info.coords.join(', ')}<br/>
-                  <img
-                    src={`https://flagcdn.com/24x18/${info.country.toLowerCase()}.png`}
-                    alt={info.country}
-                    style={{ marginTop: 4 }}
-                    />
-                </Popup>
-              </Marker>
-                 
-            </MapContainer>
-          </div>
+
+{openIpMap && (
+  <Box sx={{
+    flex:1,
+    height:'400px',
+    position:'relative'
+  }}>
+    <br/>     
+   <MapContainer
+      center={info.coords}
+      zoom={15}
+      
+      scrollWheelZoom={false}
+      style={{ height: '400px', width: '100%' }} // Fixed height for reliability
+      >
+      <FixMapSize />
+      <TileLayer
+        attribution='© OpenStreetMap'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={info.coords}>
+        <Popup>
+          {info.city}, {info.region}<br />
+          {info.coords.join(', ')}<br />
+          <img
+            src={`https://flagcdn.com/24x18/${info.country.toLowerCase()}.png`}
+            alt={info.country}
+            style={{ marginTop: 4 }}
+            />
+        </Popup>
+      </Marker>
+    </MapContainer>
+  
+    </Box>
+)}
         </Box>
+</Box>
+
                     </div>
                 ): null}
    
