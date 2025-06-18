@@ -68,12 +68,20 @@ cursor: pointer;
         max-width: 500px;
         width: 100%;
     }
+    .search-btn{
+          width: 150px;
+    height: 50px;
+    text-align: center;
+    }
     
 }
 .search-btn{
     width: 150px;
-    height: 50px;
+    height: 40px;
     text-align: center;
+    background-color: #007bff;
+    color: white;
+    transition: 0.4s;
 }
 .a{
    display: flex;
@@ -97,4 +105,8 @@ cursor: pointer;
 .c img{
     width: 20px;
     align-content: center;
+}
+.search-btn:active{
+    transform: scale(0.9);
+
 }

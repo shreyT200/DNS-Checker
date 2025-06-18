@@ -58,13 +58,7 @@ const resolvers = [
     flag: 'cn',
     loc: 'China'
   },
-  {
-    name: 'Yandex.DNS (Russia, St.Petersburg)',
-    url: 'https://doh.opendns.com/dns-query',
-    coords: [59.9375, 30.3086],
-    flag: 'ru',
-    loc: 'Russia'
-  }
+
 ];
 const DNSBL_ZONES = [
   // Existing zones

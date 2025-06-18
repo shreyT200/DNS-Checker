@@ -88,7 +88,7 @@ const handleClose=()=>
       
       {/* for opening the ip tool */}
        
-        {openIP&&(
+        {openIP  && !openModal &&(
           <IPAddress handleOnClose={handleClose}/>
         )}
       
@@ -98,6 +98,7 @@ const handleClose=()=>
 
          <div className='field-dns' style={{display:'flex', gap:'10px'}}>
 
+
           <TextField
          
          type="text"
@@ -106,16 +107,22 @@ const handleClose=()=>
          onChange={(e) => setDomain(e.target.value)}
          placeholder="Enter domain e.g. example.com"
          sx={{ maxWidth: '400px', width: '100%' }}
+         onKeyDown={(e)=>{
+          if(e.key === 'Enter' && !loading){
+            e.preventDefault()
+            check();
+          }
+         }}
          />
         
         {/* select container */}
           <Select
 
-            value={recordType}
-            onChange={(e) => setRecordType(e.target.value)}
-            sx={{
-              minWidth:'200px'
-            }}
+value={recordType}
+onChange={(e) => setRecordType(e.target.value)}
+sx={{
+  minWidth:'220px'
+}}
             >
             <MenuItem value='A'>A</MenuItem>
             <MenuItem value='AAAA'>AAAA</MenuItem>
@@ -127,9 +134,21 @@ const handleClose=()=>
         
       {/* searc button */}
         <button className='search-btn'
-            onClick={check}
-            style={{ padding: '10px 20px' }}
-            sx={{ background: '#007BFF', color: 'white' }}
+            onClick={check} 
+            onKeyDown={(e)=>{
+              if(e.key === 'Enter' || e.key === ''){
+                e.  preventDefault(); 
+                check();
+              }
+            }}
+            style={{
+              backgroundColor:'#007BFF',
+              width:'100%',
+              border:'1px solid black',
+              borderRadius:'4px',
+              fontSize:'larger',
+              textAlign:'center'
+            }}           
             >
             {loading ? 'Checking...' : 'Check'}
           </button>
