@@ -84,7 +84,7 @@ const handleClose=()=>
 
          {/* ip button */}
 
-         <button className='ip-btn' style={{backgroundColor:'#007BFF' ,color:'white', height:'30px', border:'none'}} onClick={()=>setOpenIP(true)}>IP Info Tool</button>
+         <button className='ip-btn' style={{backgroundColor:'#FE791A' ,color:'white', height:'30px', border:'none'}} onClick={()=>setOpenIP(true)}>IP Info Tool</button>
       
       {/* for opening the ip tool */}
        
@@ -253,7 +253,7 @@ sx={{
                 
                 {/* map part */}
           
-{!openModal && !openIP && !Propagation && (
+{!openModal && !openIP &&(
   <Box sx={{ width: { xs: '100%', md: '50%' } }}>
     {result && <Mapview data={result.Propagation} />}
   </Box>

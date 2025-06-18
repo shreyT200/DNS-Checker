@@ -174,18 +174,17 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
       </div>
 
         
-       
 {loading ? (
-
- <Box sx={{
-   textAlign: 'center',
-   position: 'absolute',
-   top: '60%',
-   alignItems: 'center',
-   justifyContent: 'center',
-   minHeight: '40vh',
-   width: '100%',
-   
+  
+  <Box sx={{
+    textAlign: 'center',
+    position: 'absolute',
+    top: '60%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '40vh',
+    width: '100%',
+    
   }}>
         <CircularProgress />
         
@@ -194,6 +193,10 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
         <div style={{
           padding:'20px'
         }}>
+         <div className='e'style={{height:'50px', alignContent:"center"}}>
+
+          <h1 style={{textAlign:'center', color:'	#FE791A'}}>Current User Ip: {clientIp}</h1>
+         </div>
 
         <Box sx={{display:'flex', flexDirection:{xs:'row', md:'row'}, gap:'10px', padding:'5px'}}>
 <Box sx={{
@@ -203,20 +206,20 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
   
 }}>
   
-          <p className='c'><span><img src={loc} alt='loc'/> </span><b>IP:</b> {info.ip}</p>
+          <p className='c'><span><img src={loc} alt='loc'/> </span><b style={{color:'#FE791A'}}>IP:</b> {info.ip}</p>
           <br/>
-          <p className='c'><span><img src={loc} alt='loc'/> </span><b>City:</b> {info.city}</p>
+          <p className='c'><span><img src={loc} alt='loc'/> </span><b style={{color:'#FE791A'}}>City:</b> {info.city}</p>
           <br/>
-          <p className='c'><span><img src={region} alt='img'/> </span><b>Region:</b> {info.region}</p>
+          <p className='c'><span><img src={region} alt='img'/> </span><b style={{color:'#FE791A'}}>Region:</b> {info.region}</p>
           <br/>
-<p className='c'> <b>Country:</b> {info.country}<span><img src={`https://flagcdn.com/24x18/${info.country.toLowerCase()}.png`} alt={info.country}/></span> </p>         
+<p className='c'> <b style={{color:'#FE791A'}}>Country:</b> {info.country}<span><img src={`https://flagcdn.com/24x18/${info.country.toLowerCase()}.png`} alt={info.country}/></span> </p>         
  <br/>
- <p className='c'><span><img src={org} alt='img' /> </span><b>Org:</b> {info.org}</p>
+ <p className='c'><span><img src={org} alt='img' /> </span><b style={{color:'#FE791A'}}>Org:</b> {info.org}</p>
  <br/>
 
- <p className='c'><span><img src ={post} alt='img'/></span> <b>Postal-Code:</b> {info.postal}</p>
+ <p className='c'><span><img src ={post} alt='img'/></span> <b style={{color:'#FE791A'}}>Postal-Code:</b> {info.postal}</p>
  <br/>
- <p className='c'><span><img src={timezone} alt ='img'/> </span><b>Time-Zone:</b> {info.timezone}</p>
+ <p className='c'><span><img src={timezone} alt ='img'/> </span><b style={{color:'#FE791A'}}>Time-Zone:</b> {info.timezone}</p>
 <br/>
 <span><img style={{width:20}} src={map} alt='map'/> </span><button className='map-btn'onClick={ handleMapClick}>Map</button>
           

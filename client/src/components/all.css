@@ -73,13 +73,18 @@ cursor: pointer;
     height: 50px;
     text-align: center;
     }
+    .e h1{
+font-size: larger;
+
+    }
     
 }
+
 .search-btn{
     width: 150px;
     height: 40px;
     text-align: center;
-    background-color: #007bff;
+    background-color: #FE791A;
     color: white;
     transition: 0.4s;
 }
@@ -117,4 +122,8 @@ cursor: pointer;
     font-size: large;
     color: red;
     font-weight: bold;
+    transition: 0.3s;
+}
+.map-btn:hover{
+    border-bottom: 1px solid black;
 }
