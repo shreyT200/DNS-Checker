@@ -31,7 +31,15 @@ export default function Propagation() {
   const [snackbarSeverity, setSnackbarSeverity] = useState('info');
 const [openModal, setOpenModal] = useState(false)
 const [openIP, setOpenIP] = useState(false);
-  const check = async () => {
+ 
+const openIpTool=()=>{
+  setDomain('');
+  setResult(null);
+  setRecordType('A');
+  setSnackbarOpen(false);
+  setOpenIP(true)
+}
+const check = async () => {
     if (!domain.trim()) {
       setSnackbarOpen(true);
       setSnackbarMessage('Input field empty, please fill it');
@@ -84,11 +92,11 @@ const handleClose=()=>
 
          {/* ip button */}
 
-         <button className='ip-btn' style={{backgroundColor:'#FE791A' ,color:'white', height:'30px', border:'none'}} onClick={()=>setOpenIP(true)}>IP Info Tool</button>
+         <button className='ip-btn' style={{backgroundColor:'#FE791A' ,color:'white', height:'30px', border:'none'}}  onClick={openIpTool}>IP Info Tool</button>
       
       {/* for opening the ip tool */}
        
-        {openIP  && !openModal &&(
+        {openIP  && !openModal  &&(
           <IPAddress handleOnClose={handleClose}/>
         )}
       
