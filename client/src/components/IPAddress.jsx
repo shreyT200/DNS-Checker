@@ -113,7 +113,7 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
 
   return (
     <>
-    <Box component={Paper} sx={{
+    <Box  sx={{
       display:'flex',
       flexDirection:'column',
       gap:'15px',
@@ -122,13 +122,14 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
       left:0,
       width:'100%',
       zIndex:1000,
+      backgroundColor:'white'
       
    
       
 
     }}>
       <Box  sx={{
-    height:'100vh',
+    height:{xs:'100vh', md:'100vh'},
     display:'flex',
     flexDirection:'column',
     gap:'20px'
@@ -140,8 +141,8 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
       
       <Button sx={{alignItems: 'flex-start'}} onClick={handleOnClose} >❌</Button>
     </div>
-<div style={{display:'flex', width:'100%', justifyContent:'center' }}>
-  <div className='b' style={{display:'flex', gap:'5px', flexDirection:'column', alignItems:'center', justifyContent:'center',  backgroundColor:'white',  
+<div className='g'>
+  <div className='b' style={{ gap:'5px', flexDirection:'column', alignItems:'center', justifyContent:'center',  backgroundColor:'white',  
    justifySelf:'center', borderRadius:'15px',marginTop:'10px'
   }}>
   <h2 style={{textAlign:'center'}}>Enter IP Address</h2>
@@ -190,18 +191,18 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
         
     </Box>
       ): info ? (
-        <div style={{
-          padding:'20px'
-        }}>
+        <div className='f'>
          <div className='e'style={{height:'50px', alignContent:"center"}}>
 
           <h1 style={{textAlign:'center', color:'	#FE791A'}}>Current User Ip: {clientIp}</h1>
          </div>
 
-        <Box sx={{display:'flex', flexDirection:{xs:'row', md:'row'}, gap:'10px', padding:'5px'}}>
+        <Box sx={{display:'flex', flexDirection:{xs:'row', md:'row'}, gap:'10px', padding:'5px', justifyContent:'center'}}>
 <Box sx={{
   padding:'10px',
   width:'100%',
+  maxWidth:{xs:'300px', md:'800px'},
+ 
   boxShadow:'rgba(0, 0, 0, 0.35) 0px 5px 15px',
   
 }}>
