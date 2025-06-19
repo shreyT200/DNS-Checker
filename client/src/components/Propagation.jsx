@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import Mapview from './Mapview';
+import mag from '../assest/pngegg (1).png'
+
 import './all.css';
 import {
   Box,
-  TextField,
+  // TextField,
   Select,
   MenuItem,
   Table,
@@ -21,6 +23,7 @@ import {
   CircularProgress
 } from "@mui/material";
 import IPAddress from './IPAddress';
+import { Padding } from '@mui/icons-material';
 export default function Propagation() {
   const [domain, setDomain] = useState('');
   const [result, setResult] = useState(null);
@@ -81,18 +84,19 @@ const handleClose=()=>
           <h1>DNS Propagation Checker</h1>
         </Box>
       </div>
+<Box sx={{ display:'flex', flexDirection:{xs:'column', md:'column', justifyContent:'center', alignItems:'center', width:'100%', boxSizing:'border-box', maxWidth:'column', paddingTop:'10px'}}}>
 
-      <div className='body-content'>
+      {/* <div className='body-content'> */}
       
-        <Box sx={{ display: 'flex', gap: '10px', mt: 5, justifyContent: 'end', flexWrap: 'wrap', flexDirection:'column' }}>
+        {/* <Box sx={{ display: 'flex', gap: '10px', mt: 5, justifyContent: 'end', flexWrap: 'wrap', flexDirection:'column' }}> */}
         
         {/* flex container */}
         
-        <div style={{display:'flex', flexDirection:{xs:'column', md:'row'}, justifyContent:'space-between'}}>
+        {/* <Box sx={{display:'flex', flexDirection:{xs:'column', md:'row'}, justifyContent:'space-between', Padding:'12px', maxWidth:'400px'}}> */}
 
          {/* ip button */}
 
-         <button className='ip-btn' style={{backgroundColor:'#FE791A' ,color:'white', height:'30px', border:'none'}}  onClick={openIpTool}>IP Info Tool</button>
+         {/* <button className='ip-btn' style={{backgroundColor:'#FE791A' ,color:'white', height:'30px', border:'none'}}  onClick={openIpTool}>IP Info Tool</button> */}
       
       {/* for opening the ip tool */}
        
@@ -103,42 +107,71 @@ const handleClose=()=>
       
         {/* input filed button n select field flex container */}
 
+<div className='box-coll'>
 
-         <div className='field-dns' style={{display:'flex', gap:'10px'}}>
+  {/* <div style={{display:'flex', justifyContent:'space-between'}}> */}
+  <div className='img'>
 
 
-          <TextField
-         
+
+ <h2>Introduction to DNS Propagation tool</h2>
+<img src={mag} alt='img'/>
+
+  </div>
+ <div style={{
+  borderBottom:'2px dashed black'
+ }}>
+
+    <p>The DNS Propagation Tool is a web-based utility designed to assist users in monitoring and troubleshooting DNS-related issues. It provides real-time insights into DNS record propagation across global servers and checks if a domain or IP is listed on common blacklists. It also provides with <sapn><button className='ip-btn' onClick={openIpTool}>IP to Address</button></sapn> tool</p>
+  
+ <br/>
+ </div>
+ <br/>
+ <div style={{
+  width:'100%',
+  textAlign:'center',
+  padding:'3px',
+ 
+
+ }}>
+ 
+ <h3>Search domain here</h3>
+ </div>
+
+         <div className='field-dns' style={{display:'flex', gap:'10px' }}>
+
+
+          <input
+         placeholder='Enter domain e.g. example.com'
          type="text"
-         label='Domain'
+         id='domain'
+         className='domain-input'
          value={domain}
          onChange={(e) => setDomain(e.target.value)}
-         placeholder="Enter domain e.g. example.com"
          sx={{ maxWidth: '400px', width: '100%' }}
          onKeyDown={(e)=>{
-          if(e.key === 'Enter' && !loading){
-            e.preventDefault()
-            check();
-          }
-         }}
-         />
+           if(e.key === 'Enter' && !loading){
+             e.preventDefault()
+             check();
+            }
+          }}
+          />
+      
         
         {/* select container */}
-          <Select
-
+          <select
+className='select-domain'
 value={recordType}
 onChange={(e) => setRecordType(e.target.value)}
-sx={{
-  minWidth:'220px'
-}}
-            >
-            <MenuItem value='A'>A</MenuItem>
-            <MenuItem value='AAAA'>AAAA</MenuItem>
-            <MenuItem value='CNAME'>CNAME</MenuItem>
-            <MenuItem value='MX'>MX</MenuItem>
-            <MenuItem value='NS'>NS</MenuItem>
-            <MenuItem value='TXT'>TXT</MenuItem>
-          </Select>
+
+>
+            <option value='A'>A</option>
+            <option value='AAAA'>AAAA</option>
+            <option value='CNAME'>CNAME</option>
+            <option value='MX'>MX</option>
+            <option value='NS'>NS</option>
+            <option value='TXT'>TXT</option>
+          </select>
         
       {/* searc button */}
         <button className='search-btn'
@@ -160,9 +193,11 @@ sx={{
             >
             {loading ? 'Checking...' : 'Check'}
           </button>
-              </div>
             </div>
-        </Box>
+              </div>
+              {/* </Box> */}
+            {/* </div> */}
+        {/* </Box> */}
 
         <br />
         <div className='container'>
@@ -221,7 +256,7 @@ sx={{
 
 
 {openModal && result.blacklist?.length > 0 && (
-    <Box sx={{zIndex:1000, position:'absolute', display:'flex', top:0, left:0, width:'100%', overflowX:'hidden'}}>
+  <Box sx={{zIndex:1000, position:'absolute', display:'flex', top:0, left:0, width:'100%', overflowX:'hidden'}}>
 <TableContainer component={Paper}>
     <div style={{display:'flex', flexDirection:'column',}}>
 
@@ -236,15 +271,15 @@ sx={{
       </TableHead>
       <TableBody>
         {result.blacklist.map((b, i) => (
-            <TableRow key={i}>
+          <TableRow key={i}>
             <TableCell align='center'>{b.ip || '-'}</TableCell>
             <TableCell align='center'>{b.zone}</TableCell>
             <TableCell align='center'>
               {b.listed ? (
-                  <span style={{ color: 'red', fontWeight: 'bold' }}>❌</span>
-                ) : (
-                    <span style={{ color: 'green', fontWeight: 'bold' }}>✅</span>
-                )}
+                <span style={{ color: 'red', fontWeight: 'bold' }}>❌</span>
+              ) : (
+                <span style={{ color: 'green', fontWeight: 'bold' }}>✅</span>
+              )}
             </TableCell>
           </TableRow>
         ))}
@@ -272,7 +307,8 @@ sx={{
             ) : null}
           </Box>
         </div>
-      </div>
+      {/* </div> */}
+      </Box>
 
       <Snackbar
         open={SnackbarOpen}

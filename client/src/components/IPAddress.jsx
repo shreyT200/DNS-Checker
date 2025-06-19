@@ -40,7 +40,7 @@ const [snackbarMessage, setSnackbarMessage] = useState('');
 const [SnackbarOpen, setSnackbarOpen] = useState(false);
 const [clientIp, setClientIp] = useState('');
 const [inputIp, setInputIp] = useState('');
-const [openIpMap, setOpenIpMap]= useState(false);
+const [openIpMap, setOpenIpMap]= useState(true);
 
 const handleMapClick = ()=>{
   setOpenIpMap(true)
@@ -150,7 +150,7 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
    
       <input
       // variant='filled'
-      // label='Enter Ip Address'
+      label='Enter Ip Address'
       type="text"
       placeholder='IP'
       className='input-ip'

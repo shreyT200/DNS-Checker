@@ -61,7 +61,6 @@ const resolvers = [
 
 ];
 const DNSBL_ZONES = [
-  // Existing zones
   'b.barracudacentral.org',
   'zen.spamhaus.org',
   'bl.spamcop.net',

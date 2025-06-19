@@ -55,21 +55,3 @@ export default function MapView({ data }) {
 }
 
 
-// {data.map((r, i)=>{
-//   const isSuccess = r.answer?.length;
-//   const customIcon = new L.Icon({
-//     iconUrl:isSuccess ?'https://maps.google/mapfiles/ms/icons/green-dot.png' : r.error ?'https://maps.googlr.com/mapfiles/ms/icons/red-dot.png' : 'https://maps.google.com/mapfiles/ms/icon/grey-dot.png',
-//     iconSize:[32, 32],
-//     iconAnchor:[16,32],
-//     popupAnchor:[0,-32],
-//   })
-// return(
-//   <Marker key={i} position={r.coords} icon={customIcon}>
-//     <Popup>
-//       <strong>{r.resolver}</strong> <br/>
-//       {isSuccess ? r.answer.join(', ')
-//       : r.error || 'no record'}
-//     </Popup>
-//   </Marker>
-// )
-// })}}
