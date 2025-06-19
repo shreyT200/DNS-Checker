@@ -51,18 +51,43 @@ const handleMapClick = ()=>{
 }
 
 
-useEffect(()=>{
-  axios.get('https://api.ipify.org?format=json')
-  .then(resp=>{
-    setClientIp(resp.data.ip);
-    fetchInfo(resp.data.ip);
-  })
-  .catch(()=>{
-    setSnackbarOpen(true);
-    setSnackbarMessage('Could not detect your ip')
-    setSnackbarSeverity('error');
-  })
-},[]);
+useEffect(() => {
+  setLoading(true);
+  const fetchClientInfo = async () => {
+    try {
+      const ipRes = await axios.get('https://api.ipify.org?format=json');
+      const ip = ipRes.data.ip;
+      setClientIp(ip);
+
+      const geoRes = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo/${ip}`);
+      const data = geoRes.data;
+
+      if (!data.loc) throw new Error('Location not found');
+
+      const [lat, lng] = data.loc.split(',').map(Number);
+      setInfo({
+        ip: data.ip,
+        city: data.city,
+        region: data.region,
+        country: data.country,
+        org: data.org,
+        coords: [lat, lng],
+        postal: data.postal,
+        timezone: data.timezone,
+      });
+    } catch (err) {
+      setSnackbarOpen(true);
+      setSnackbarMessage('Failed fetching IP info');
+      setSnackbarSeverity('error');
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchClientInfo();
+}, []);
+
 
 
   const isValidIp = ip => /^(25[0-5]|2[0-4]\d|[01]?\d?\d)(\.(25[0-5]|2[0-4]\d|[01]?\d?\d)){3}$/.test(ip);
