@@ -7,8 +7,8 @@ import './all.css';
 import {
   Box,
   // TextField,
-  Select,
-  MenuItem,
+  // Select,
+  // MenuItem,
   Table,
   TableHead,
   TableCell,
@@ -23,7 +23,6 @@ import {
   CircularProgress
 } from "@mui/material";
 import IPAddress from './IPAddress';
-import { Padding } from '@mui/icons-material';
 export default function Propagation() {
   const [domain, setDomain] = useState('');
   const [result, setResult] = useState(null);
