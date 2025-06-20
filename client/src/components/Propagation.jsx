@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect } from 'react';
 import { api } from '../services/api';
 import Mapview from './Mapview';
 import mag from '../assest/Screenshot 2025-06-19 160526.png'
@@ -21,12 +21,15 @@ import {
   Slide,
   Snackbar,
   Alert,
-  CircularProgress
+  CircularProgress,
 } from "@mui/material";
 import IPAddress from './IPAddress';
 import IPInfo from './IPInfo';
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
 import {Fab, Tooltip} from '@mui/material'
+
+import {gsap} from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 export default function Propagation() {
   const [domain, setDomain] = useState('');
   const [result, setResult] = useState(null);
@@ -38,6 +41,50 @@ export default function Propagation() {
 const [openModal, setOpenModal] = useState(false)
 const [openIP, setOpenIP] = useState(false);
  
+gsap.registerPlugin(ScrollTrigger)
+const bannerRef = useRef();
+const searchRef = useRef();
+const fabRef = useRef();
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(()=>{
+      const tl = gsap.timeline({defaults:{ease:'power3.out'}})
+      if(bannerRef.current){
+        tl.from(bannerRef.current,{ y:-100, opacity:0, duration:0.6})
+
+      }
+      if(searchRef.current){
+        tl.from(searchRef.current,{
+          opacity:0,
+          scale:0.9,
+          duration:0.5
+        }, '>-0.2')
+
+      }
+      if(fabRef.current){
+        tl.from(fabRef.current,{opacity:0, y:20, duration:0.4}, '>-0.2')
+      }
+
+      gsap.utils.toArray('[data-animate="fade-up"]').forEach((el)=>{
+        gsap.from(el, {
+          scrollTrigger:{
+            trigger:el,
+            start:'top 80%',
+            toggleActions:'play none none none'
+          },
+          y:50,
+          opacity:0,
+          duration:0.8,
+          ease:'power3.out',
+          overwrite:true,
+
+        })
+      })
+    })
+    return () => ctx.revert();
+  }, []);
+
+
 const openIpTool=()=>{
   setDomain('');
   setResult(null);
@@ -87,12 +134,13 @@ const handleClose=()=>
           <h1>DNS Propagation Checker</h1>
         </Box>
       </div> */}
-    <Box backgroundColor= '#007BFF' color='white'>
+    <Box ref={bannerRef} backgroundColor= '#007BFF' color='white'>
      <Typography variant='h3'>DNS Propagation Checker</Typography>
      <br/>
     </Box>
 <Tooltip title="Go to DNS Search" arrow>
   <Fab
+  ref={fabRef}
     color="error"
     sx={{
       position: 'fixed',
@@ -101,8 +149,8 @@ const handleClose=()=>
       zIndex: 2000,
     }}
     onClick={() => {
-      const el = document.getElementById('dns-search');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('dns-search')?.scrollIntoView({ behavior: 'smooth' });
+
     }}
   >
     <ArrowDownwardIcon />
@@ -144,7 +192,7 @@ const handleClose=()=>
       
         {/* input filed button n select field flex container */}
 
-<div className='box-coll' style={{flex:'0 0 50%'}}>
+<div data-animate='fade-up' className='box-coll' style={{flex:'0 0 50%'}}>
 
   {/* <div style={{display:'flex', justifyContent:'space-between'}}> */}
   <div className='img'>
@@ -174,7 +222,7 @@ const handleClose=()=>
 
           </Box>
        
-        <Box sx={{width:'100%', display:'flex', justifyContent:'center', gap:'10px', flexDirection:{xs:'column', md:'row'} }}>
+        <Box data-animate='fade-up' sx={{width:'100%', display:'flex', justifyContent:'center', gap:'10px', flexDirection:{xs:'column', md:'row'} }}>
 <Box sx={{width:'100%'}}>
   <IPInfo/>
 </Box>
@@ -185,7 +233,7 @@ const handleClose=()=>
         </Box>
         </Box>
 {/* search field */}
-        <div id='dns-search' style={{alignTtems: 'center'
+        <div id='dns-search' ref={searchRef} style={{alignTtems: 'center'
 }}>
         <Box
 component={Paper}
