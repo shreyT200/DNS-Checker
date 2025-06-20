@@ -31,10 +31,6 @@
     width: 250px;
     border-radius: 5px;
     border: 1px solid black;
- 
- 
-    
-
 }
 .input-ip:focus{
     outline: none;
@@ -98,11 +94,7 @@ transform: scale(1.1);
         margin: 10px;
 
     }
-    .domain-input {
-        width: 100%;
-        min-width: 0;
-        max-width: none;
-    }
+    
     .select-domain {
         width: 100%;
         min-width: 0;
@@ -111,13 +103,14 @@ transform: scale(1.1);
     .img h2{
         font-size: large;
     }
+    .ip-btn{
+        font-size: small;
+    }
   
 }
 
 .search-btn{
-    width: 100%;
-  
-    
+    width: 100%;  
     height: 40px;
     text-align: center;
     background-color: #FE791A;
@@ -133,7 +126,6 @@ transform: scale(1.1);
 .b{
     border-top: 5px solid blue;
     width: 100%;
-  
     display: flex;
     padding: 20px;
     align-content: center;
@@ -176,11 +168,9 @@ transform: scale(1.1);
 .box-coll{
     display: flex;
     width: 100%;
-   
     padding: 15px;
     flex-direction: column;
     max-width: 900px;
-   
     height: 100%;
     justify-content: center;
     background-color: #007bffe1;
@@ -188,17 +178,15 @@ transform: scale(1.1);
     align-items: center;
     justify-content: space-around;
     box-sizing: border-box;
-    margin: 0 auto;
 }
 .domain-input {
-width: 100%;
+width: 95%;
 padding: 10px;
-
 outline: none;
 border: none;
- border-block: 2px solid #ffffff;
-   transition: border-block 0.3s ease-in-out;
-   border-radius: 5px;
+border-block: 2px solid #ccc;
+transition: border-block 0.3s ease-in-out;
+border-radius: 5px;
 
 }
 .domain-input:focus{
@@ -208,12 +196,10 @@ border: none;
 
 .select-domain{
     width: 100%;
-  
- 
     padding: 10px;
     border-radius:5px ;
     outline: none;
-    border: 1px solid white;
+    border: 1px solid #ccc;
     background-color: white;
     color: black;
     transition: border ,  0.3s ease-in-out;
@@ -224,11 +210,9 @@ border: none;
 }
 .img img{
    
-    max-width: 50px;
-    width: 100%;
-    display: flex;
-    height: 50px;
-    
+width: 200px; 
+justify-self: center;
+margin-bottom: 5px;   
 }
 .domain-input, .select-domain{
     margin: 10px 0;
@@ -237,10 +221,10 @@ border: none;
 
 .img{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 5px;
-    text-align: center;
-align-items: center;
+
+justify-content: flex-start;
 }
 .img p{
     text-overflow: clip;
@@ -248,6 +232,13 @@ align-items: center;
 
 }
 .container{
-    width: 95%;
+    width: 99%;
     
+}
+.title-2{
+    padding-bottom: 5px;
+    width: 100%;
+}
+.z{
+    padding: 10px;
 }

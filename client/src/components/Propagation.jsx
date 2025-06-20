@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { api } from '../services/api';
 import Mapview from './Mapview';
-import mag from '../assest/pngegg (1).png'
-
+import mag from '../assest/Screenshot 2025-06-19 160526.png'
+import InfoPage from './InfoPage';
 import './all.css';
 import {
   Box,
   // TextField,
   // Select,
   // MenuItem,
+  Typography,
   Table,
   TableHead,
   TableCell,
@@ -71,7 +72,7 @@ const handleClose=()=>
 }
   return (
     <>
-      <div className='banner'>
+      {/* <div className='banner'>
         <Box sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -82,9 +83,19 @@ const handleClose=()=>
         }}>
           <h1>DNS Propagation Checker</h1>
         </Box>
-      </div>
-<Box sx={{ display:'flex', flexDirection:{xs:'column', md:'column', justifyContent:'center', alignItems:'center', width:'100%', boxSizing:'border-box', maxWidth:'column', paddingTop:'10px'}}}>
+      </div> */}
+    <Box backgroundColor= '#007BFF' color='white'>
+     <Typography variant='h3'>DNS Propagation Checker</Typography>
+     <br/>
+    </Box>
 
+
+    
+
+
+<Box sx={{ display:'flex', flexDirection:{xs:'column', md:'column'},width:'100%', alignItems:'center',justifyContent:'center', paddingTop:'10px', gap:'10px',}}>
+
+    
       {/* <div className='body-content'> */}
       
         {/* <Box sx={{ display: 'flex', gap: '10px', mt: 5, justifyContent: 'end', flexWrap: 'wrap', flexDirection:'column' }}> */}
@@ -106,33 +117,58 @@ const handleClose=()=>
       
         {/* input filed button n select field flex container */}
 
-<div className='box-coll'>
+<div className='box-coll' style={{flex:'0 0 50%'}}>
 
   {/* <div style={{display:'flex', justifyContent:'space-between'}}> */}
   <div className='img'>
 
+<div style={{display:'flex', flexDirection:'row', alignItems:'center', width:"100%"}}>
 
 
- <h2>Introduction to DNS Propagation tool</h2>
 <img src={mag} alt='img'/>
+ <h2>Introduction to DNS Propagation tool</h2>
+</div>
 
-  </div>
- <div style={{
-  borderBottom:'2px dashed black'
- }}>
+
+<div style={{width:'70%', display:'flex', textAlign:'start',marginLeft:'22%', padding:'3px', borderLeft:'3px solid black'}}>
 
     <p>The DNS Propagation Tool is a web-based utility designed to assist users in monitoring and troubleshooting DNS-related issues. It provides real-time insights into DNS record propagation across global servers and checks if a domain or IP is listed on common blacklists. It also provides with <sapn><button className='ip-btn' onClick={openIpTool}>IP to Address</button></sapn> tool</p>
+</div>
+<br/>
   
  <br/>
  </div>
  <br/>
- <div style={{
+ 
+              </div>
+              {/* </Box> */}
+            {/* </div> */}
+        {/* </Box> */}
+<Box
+component={Paper}
+sx={{
+  width:{xs:'90%', md:'100%'},
+  maxWidth:'880px',
+  padding:'10px',
+  minHeight:'150px',
+  display:'flex',
+  flex:'0 0 50%',
+  backgroundColor:'#007BFF',
+  flexDirection:'column',
+
+  justifyContent:'center',
+  alignItems:'center',
+  borderRadius:'5px',
+  boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
+}}>
+
+<div style={{
   width:'100%',
   textAlign:'center',
   padding:'3px',
- 
-
- }}>
+  
+  
+}}>
  
  <h3>Search domain here</h3>
  </div>
@@ -193,14 +229,11 @@ onChange={(e) => setRecordType(e.target.value)}
             {loading ? 'Checking...' : 'Check'}
           </button>
             </div>
-              </div>
-              {/* </Box> */}
-            {/* </div> */}
-        {/* </Box> */}
-
+              </Box>
+          </Box>
         <br />
         <div className='container'>
-          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-evenly', gap: '10px' }}>
+          <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'center', gap: '10px' }}>
             {loading ? (
               <Box sx={{
                 textAlign: 'center',
@@ -307,7 +340,7 @@ onChange={(e) => setRecordType(e.target.value)}
           </Box>
         </div>
       {/* </div> */}
-      </Box>
+           
 
       <Snackbar
         open={SnackbarOpen}

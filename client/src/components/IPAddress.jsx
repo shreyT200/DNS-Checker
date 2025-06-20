@@ -164,7 +164,7 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
   
     <div style={{alignContent:'center', justifyContent:'end', display:'flex', width:'100%'}}>
       
-      <Button sx={{alignItems: 'flex-start'}} onClick={handleOnClose} >❌</Button>
+      <Button sx={{alignItems: 'flex-start' }} onClick={handleOnClose} >❌</Button>
     </div>
 <div className='g'>
   <div className='b' style={{ gap:'5px', flexDirection:'column', alignItems:'center', justifyContent:'center',  backgroundColor:'white',  
