@@ -5,7 +5,8 @@ export default function InfoPage() {
     <div style={{
         backgroundColor:'#007BFF',
         color:'white',
-        fontSize:'18px'
+        fontSize:'18px',
+        borderRadius:'9px'
     }}>
 
     <div style={{textWrap:'pretty', width:'100%'}}>

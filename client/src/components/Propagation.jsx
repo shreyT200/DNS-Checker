@@ -93,7 +93,7 @@ const handleClose=()=>
     
 
 
-<Box sx={{ display:'flex', flexDirection:{xs:'column', md:'column'},width:'100%', alignItems:'center',justifyContent:'center', paddingTop:'10px', gap:'10px',}}>
+<Box sx={{ display:'flex', flexDirection:{xs:'column', md:'column'},width:'100%', alignItems:'center',justifyContent:'center', paddingTop:'10px', gap:'50px',}}>
 
     
       {/* <div className='body-content'> */}
@@ -111,7 +111,15 @@ const handleClose=()=>
       {/* for opening the ip tool */}
        
         {openIP  && !openModal  &&(
+          <Box sx={{
+            display:'flex',
+            justifyContent:'center',
+            width:'100%',
+            
+          }}>
+
           <IPAddress handleOnClose={handleClose}/>
+        </Box>
         )}
       
       
@@ -155,9 +163,9 @@ sx={{
   flex:'0 0 50%',
   backgroundColor:'#007BFF',
   flexDirection:'column',
-
+margin:"0 auto",
   justifyContent:'center',
-  alignItems:'center',
+  alignItems:'flex-start',
   borderRadius:'5px',
   boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
 }}>
@@ -226,12 +234,21 @@ onChange={(e) => setRecordType(e.target.value)}
               textAlign:'center'
             }}           
             >
+
             {loading ? 'Checking...' : 'Check'}
           </button>
             </div>
               </Box>
           </Box>
-        <br />
+       
+        <div style={{width:'100%', display:'flex', justifyContent:'center'}}>
+
+        <Box sx={{width:'100%', maxWidth:'1300px', alignItems:'center', }}> 
+
+        <InfoPage/>
+        </Box>
+        </div>
+       
         <div className='container'>
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'center', gap: '10px' }}>
             {loading ? (
@@ -288,40 +305,87 @@ onChange={(e) => setRecordType(e.target.value)}
 
 
 {openModal && result.blacklist?.length > 0 && (
-  <Box sx={{zIndex:1000, position:'absolute', display:'flex', top:0, left:0, width:'100%', overflowX:'hidden'}}>
-<TableContainer component={Paper}>
-    <div style={{display:'flex', flexDirection:'column',}}>
+  <Box 
+    sx={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      height: '100vh',
+      width: '100vw',
+      backgroundColor: 'rgba(0,0,0,0.51)',
+      zIndex: 1300,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}
+  >
+    <Paper
+      sx={{
+        width: '100%',
+        maxWidth: '900px',
+        padding: '20px',
+        borderRadius: '12px',
+        position: 'relative',
+        backgroundColor: '#fff',
+        maxHeight: '85vh',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      {/* Close Button */}
+      <Button
+        onClick={() => setOpenModal(false)}
+        sx={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          fontSize: '18px',
+          color: '#000',
+        }}
+      >
+        ❌
+      </Button>
 
-    <Button onClick={()=>setOpenModal(false)} sx={{fontSize:'16px', display:'flex', marginLeft:{md:'95%', xs:'87%'},}}>❌</Button>
-    <Table>
-      <TableHead>
-        <TableRow sx={{ backgroundColor: '#FE791A' }}>
-          <TableCell align='center'>IP</TableCell>
-          <TableCell align='center'>Blacklist</TableCell>
-          <TableCell align='center'>Listed</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {result.blacklist.map((b, i) => (
-          <TableRow key={i}>
-            <TableCell align='center'>{b.ip || '-'}</TableCell>
-            <TableCell align='center'>{b.zone}</TableCell>
-            <TableCell align='center'>
-              {b.listed ? (
-                <span style={{ color: 'red', fontWeight: 'bold' }}>❌</span>
-              ) : (
-                <span style={{ color: 'green', fontWeight: 'bold' }}>✅</span>
-              )}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-    
-        </div>
-  </TableContainer>
-</Box>
+      {/* Title */}
+      <Box sx={{ padding: '20px 16px 8px 16px', textAlign: 'center' }}>
+        <Typography variant='h6' fontWeight='bold'>
+          Blacklist Results
+        </Typography>
+      </Box>
+
+      {/* Scrollable Table */}
+      <Box sx={{ overflowY: 'auto', maxHeight: '60vh' }}>
+        <Table stickyHeader>
+          <TableHead 
+            
+          >
+            <TableRow >
+              <TableCell sx={{backgroundColor:'#FE791A'}} align='center'>IP</TableCell>
+              <TableCell sx={{backgroundColor:'#FE791A'}} align='center'>Blacklist</TableCell>
+              <TableCell sx={{backgroundColor:'#FE791A'}} align='center'>Listed</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {result.blacklist.map((b, i) => (
+              <TableRow key={i}>
+                <TableCell align='center'>{b.ip || '-'}</TableCell>
+                <TableCell align='center'>{b.zone}</TableCell>
+                <TableCell align='center'>
+                  {b.listed ? (
+                    <span style={{ color: 'red', fontWeight: 'bold' }}>❌</span>
+                  ) : (
+                    <span style={{ color: 'green', fontWeight: 'bold' }}>✅</span>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
+    </Paper>
+  </Box>
 )}
+
 
                     
                 </Box>

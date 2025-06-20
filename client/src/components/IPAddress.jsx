@@ -142,12 +142,15 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
       display:'flex',
       flexDirection:'column',
       gap:'15px',
-      position:'absolute',
+      position:'fixed',
       top:0,
       left:0,
       width:'100%',
       zIndex:1000,
-      backgroundColor:'white'
+      backgroundColor:'white',
+      overflow:'auto',
+      zIndex:1300,
+      paddingBottom:'20px',
       
    
       

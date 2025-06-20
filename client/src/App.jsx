@@ -7,7 +7,7 @@ export default function App() {
 
   return (
     <>
-<Box sx={{display:'flex', flexDirection:'column'}}>
+<Box sx={{display:'flex', flexDirection:'column', gap:'40px'}}>
 
 <Porpagation/>
   {/* <Button sx={{
