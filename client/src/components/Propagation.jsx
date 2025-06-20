@@ -25,6 +25,8 @@ import {
 } from "@mui/material";
 import IPAddress from './IPAddress';
 import IPInfo from './IPInfo';
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
+import {Fab, Tooltip} from '@mui/material'
 export default function Propagation() {
   const [domain, setDomain] = useState('');
   const [result, setResult] = useState(null);
@@ -89,12 +91,28 @@ const handleClose=()=>
      <Typography variant='h3'>DNS Propagation Checker</Typography>
      <br/>
     </Box>
-
+<Tooltip title="Go to DNS Search" arrow>
+  <Fab
+    color="error"
+    sx={{
+      position: 'fixed',
+      bottom: 24,
+      right: 24,
+      zIndex: 2000,
+    }}
+    onClick={() => {
+      const el = document.getElementById('dns-search');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }}
+  >
+    <ArrowDownwardIcon />
+  </Fab>
+</Tooltip>
 
     
 
 
-<Box sx={{ display:'flex', flexDirection:{xs:'column', md:'column'},width:'100%', alignItems:'center',justifyContent:'center', paddingTop:'10px', gap:'50px',}}>
+<Box sx={{ display:'flex', flexDirection:{xs:'column', md:'column'},width:'100%', alignItems:'center',justifyContent:'center', paddingTop:'10px',}}>
 
     
       {/* <div className='body-content'> */}
@@ -160,11 +178,15 @@ const handleClose=()=>
 <Box sx={{width:'100%'}}>
   <IPInfo/>
 </Box>
-        <Box sx={{width:'100%', maxWidth:'1300px', alignItems:'center', }}> 
+
+        <Box sx={{width:'100%', maxWidth:'1300px', alignItems:'center', }} > 
 
         <InfoPage/>
         </Box>
         </Box>
+{/* search field */}
+        <div id='dns-search' style={{alignTtems: 'center'
+}}>
         <Box
 component={Paper}
 sx={{
@@ -176,9 +198,9 @@ sx={{
   flex:'0 0 50%',
   backgroundColor:'#007BFF',
   flexDirection:'column',
-margin:"0 auto",
+  margin:"0 auto",
   justifyContent:'center',
-alignTtems: 'center',
+  alignTtems: 'center',
   borderRadius:'5px',
   boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
 }}>
@@ -252,6 +274,7 @@ onChange={(e) => setRecordType(e.target.value)}
           </button>
             </div>
               </Box>
+              </div>
        
         <div className='container'>
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'center', gap: '10px' }}>
