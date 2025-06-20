@@ -6,14 +6,15 @@ export default function InfoPage() {
         backgroundColor:'#007BFF',
         color:'white',
         fontSize:'18px',
-        borderRadius:'9px'
+        borderRadius:'9px',
+        paddingBottom:'25px'
     }}>
 
     <div style={{textWrap:'pretty', width:'100%'}}>
 <div className='z'>
 
     <div className='title'>
-      <h2>What is a DNS Checker and How It Is Useful</h2>
+      <h1>What is a DNS Checker and How It Is Useful</h1>
     </div>
     <br/>
   <div className='q1-block'>
@@ -33,33 +34,46 @@ export default function InfoPage() {
     </div>
     <p>
   <br/>
+       <p>
         <b>Troubleshooting: </b>
+        </p> <br/>
+        <p>
+
         Identifies delays or errors in DNS propagation, helping resolve issues like website downtime or email delivery problems.</p>
+        </p>
         <br/>
     <p>
        <b>Verification: </b>
+    </p><br/>
+<p>
+
        Ensures DNS records are correctly configured and accessible globally after updates. 
-    </p>
+</p>
         <br/>
     <p>
         <b>Performance Monitoring: </b>
+    </p><br/>
+     <p>
+
         Detects inconsistencies across servers, improving website reliability and user experience.
-    </p>
+     </p>
         <br/>
     <p>
             
         <b>Security:</b>
+    </p><br/>
+<p>
+
         Helps detect misconfigurations that could be exploited, ensuring domain integrity.
-    </p>
+</p>
         <br/>
-    <p>
-       <b>Efficiency:</b>
-         Saves time for administrators by automating the process of checking DNS status across multiple locations.
-    </p>
+
    </div>
 </div>
    
     </div>
     </div>
+
+  
   )
 }

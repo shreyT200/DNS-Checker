@@ -24,6 +24,7 @@ import {
   CircularProgress
 } from "@mui/material";
 import IPAddress from './IPAddress';
+import IPInfo from './IPInfo';
 export default function Propagation() {
   const [domain, setDomain] = useState('');
   const [result, setResult] = useState(null);
@@ -134,11 +135,11 @@ const handleClose=()=>
 
 
 <img src={mag} alt='img'/>
- <h2>Introduction to DNS Propagation tool</h2>
+ <h2 style={{color:'white'}}>Introduction to DNS Propagation tool</h2>
 </div>
 
 
-<div style={{width:'70%', display:'flex', textAlign:'start',marginLeft:'22%', padding:'3px', borderLeft:'3px solid black'}}>
+<div style={{width:'70%', display:'flex', textAlign:'start',marginLeft:'22%', padding:'3px', borderLeft:'3px solid white', color:'white'}}>
 
     <p>The DNS Propagation Tool is a web-based utility designed to assist users in monitoring and troubleshooting DNS-related issues. It provides real-time insights into DNS record propagation across global servers and checks if a domain or IP is listed on common blacklists. It also provides with <sapn><button className='ip-btn' onClick={openIpTool}>IP to Address</button></sapn> tool</p>
 </div>
@@ -152,11 +153,23 @@ const handleClose=()=>
               {/* </Box> */}
             {/* </div> */}
         {/* </Box> */}
-<Box
+
+          </Box>
+       
+        <Box sx={{width:'100%', display:'flex', justifyContent:'center', gap:'10px', flexDirection:{xs:'column', md:'row'} }}>
+<Box sx={{width:'100%'}}>
+  <IPInfo/>
+</Box>
+        <Box sx={{width:'100%', maxWidth:'1300px', alignItems:'center', }}> 
+
+        <InfoPage/>
+        </Box>
+        </Box>
+        <Box
 component={Paper}
 sx={{
   width:{xs:'90%', md:'100%'},
-  maxWidth:'880px',
+  maxWidth:'1300px',
   padding:'10px',
   minHeight:'150px',
   display:'flex',
@@ -165,7 +178,7 @@ sx={{
   flexDirection:'column',
 margin:"0 auto",
   justifyContent:'center',
-  alignItems:'flex-start',
+alignTtems: 'center',
   borderRadius:'5px',
   boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
 }}>
@@ -178,7 +191,7 @@ margin:"0 auto",
   
 }}>
  
- <h3>Search domain here</h3>
+ <h2 style={{color:'white'}}>Search domain here</h2>
  </div>
 
          <div className='field-dns' style={{display:'flex', gap:'10px' }}>
@@ -239,15 +252,6 @@ onChange={(e) => setRecordType(e.target.value)}
           </button>
             </div>
               </Box>
-          </Box>
-       
-        <div style={{width:'100%', display:'flex', justifyContent:'center'}}>
-
-        <Box sx={{width:'100%', maxWidth:'1300px', alignItems:'center', }}> 
-
-        <InfoPage/>
-        </Box>
-        </div>
        
         <div className='container'>
           <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'center', gap: '10px' }}>
