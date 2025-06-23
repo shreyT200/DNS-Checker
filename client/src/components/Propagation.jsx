@@ -137,7 +137,7 @@ const handleClose=()=>
     <Box ref={bannerRef} backgroundColor= '#007BFF' color='white' sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100%', }}>
 
 
-     <Typography variant='h3'>DNS Propagation Checker</Typography>
+     <Typography  sx={{fontSize:{xs:'16px', md:'30px'}}}>DNS Propagation Checker</Typography>
  
    <button className='ip-btn' onClick={openIpTool}>IP to Address</button>
      
