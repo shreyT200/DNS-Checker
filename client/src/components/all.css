@@ -42,13 +42,13 @@
     transition: 0.3s;
  background-color: transparent;
 border: none;
-font-size: medium;
+font-size: 30px;
+color: white;
 font-weight: bold;
-border-bottom: 2px dashed rgb(255, 0, 0);
+margin-right: 15px;
 }
 .ip-btn:hover{
-color: black;
-cursor: pointer;
+    cursor: pointer;
 transform: scale(1.1);
 
 }

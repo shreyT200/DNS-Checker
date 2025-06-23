@@ -134,9 +134,13 @@ const handleClose=()=>
           <h1>DNS Propagation Checker</h1>
         </Box>
       </div> */}
-    <Box ref={bannerRef} backgroundColor= '#007BFF' color='white'>
+    <Box ref={bannerRef} backgroundColor= '#007BFF' color='white' sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100%', }}>
+
+
      <Typography variant='h3'>DNS Propagation Checker</Typography>
-     <br/>
+ 
+   <button className='ip-btn' onClick={openIpTool}>IP to Address</button>
+     
     </Box>
 <Tooltip title="Go to DNS Search" arrow>
   <Fab
@@ -197,6 +201,7 @@ const handleClose=()=>
   {/* <div style={{display:'flex', justifyContent:'space-between'}}> */}
   <div className='img'>
 
+  
 <div style={{display:'flex', flexDirection:'row', alignItems:'center', width:"100%"}}>
 
 
@@ -207,10 +212,9 @@ const handleClose=()=>
 
 <div style={{width:'70%', display:'flex', textAlign:'start',marginLeft:'22%', padding:'3px', borderLeft:'3px solid white', color:'white'}}>
 
-    <p>The DNS Propagation Tool is a web-based utility designed to assist users in monitoring and troubleshooting DNS-related issues. It provides real-time insights into DNS record propagation across global servers and checks if a domain or IP is listed on common blacklists. It also provides with <sapn><button className='ip-btn' onClick={openIpTool}>IP to Address</button></sapn> tool</p>
+    <p>The DNS Propagation Tool is a web-based utility designed to assist users in monitoring and troubleshooting DNS-related issues. It provides real-time insights into DNS record propagation across global servers and checks if a domain or IP is listed on common blacklists. </p>
 </div>
 <br/>
-  
  <br/>
  </div>
  <br/>
@@ -229,7 +233,7 @@ const handleClose=()=>
 
         <Box sx={{width:'100%', maxWidth:'1300px', alignItems:'center', }} > 
 
-        <InfoPage/>
+        <InfoPage />
         </Box>
         </Box>
 {/* search field */}
