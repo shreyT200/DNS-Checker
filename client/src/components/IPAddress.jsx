@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import axios from 'axios';
 import {
   MapContainer, TileLayer, Marker, Popup, useMap
@@ -15,6 +15,15 @@ import timezone from '../assest/icons8-timezone-100.png'
 import post from '../assest/icons8-postal-100.png'
 import org from '../assest/icons8-organization-96.png'
 import map from '../assest/land-location.png';
+import IPInfo from './IPInfo';
+import {Fab, Tooltip} from '@mui/material'
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward"
+import ip from '../assest/iconfinder-dedicatedipaddress-4263513_117864.png'
+import {gsap} from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+
+
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -31,7 +40,7 @@ function FixMapSize() {
   return null;
 }
 
-export default function IPAddress({handleOnClose}) {
+export default function IPAddress() {
   const [info, setInfo] = useState(null);
   const [error, setError] = useState(null);
 const [loading, setLoading] = useState(false);
@@ -41,6 +50,10 @@ const [SnackbarOpen, setSnackbarOpen] = useState(false);
 const [clientIp, setClientIp] = useState('');
 const [inputIp, setInputIp] = useState('');
 const [openIpMap, setOpenIpMap]= useState(true);
+
+
+
+
 
 const handleMapClick = ()=>{
   setOpenIpMap(true)
@@ -136,9 +149,95 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
         }
   };
 
+
+
+  gsap.registerPlugin(ScrollTrigger)
+const bannerRef = useRef();
+const searchRef = useRef();
+const fabRef = useRef();
+
+  useLayoutEffect(() => {
+    const ctx = gsap.context(()=>{
+      const tl = gsap.timeline({defaults:{ease:'power3.out'}})
+      if(bannerRef.current){
+        tl.from(bannerRef.current,{ y:-100, opacity:0, duration:0.9})
+
+      }
+      if(searchRef.current){
+        tl.from(searchRef.current,{
+          opacity:0,
+          scale:1.2,
+          duration:0.5
+        }, '>-0.2')
+
+      }
+      if(fabRef.current){
+        tl.from(fabRef.current,{opacity:0, y:20, duration:0.4}, '>-0.2')
+      }
+
+      gsap.utils.toArray('[data-animate="fade-up"]').forEach((el)=>{
+        gsap.from(el, {
+          scrollTrigger:{
+            trigger:el,
+            start:'top 80%',
+            toggleActions:'play none none none'
+          },
+          y:50,
+          opacity:0,
+          duration:0.8,
+          ease:'power3.out',
+          overwrite:true,
+
+        })
+      })
+    })
+    return () => ctx.revert();
+  }, []);
+
+
+
+
+
   return (
     <>
-    <Box  sx={{
+    
+    <Tooltip title="Go to IP to Address" arrow>
+<Fab color='error'
+ref={fabRef}
+sx={{
+  position:'fixed',
+  bottom:24,
+  right:24,
+  zIndex:1000
+}}
+onClick={()=> document.getElementById('ip-field')?.scrollIntoView({behavior:'auto'})}>
+  <ArrowDownwardIcon />
+</Fab>
+    </Tooltip>
+  
+  
+  
+  
+    <Box  data-animate='fade-up' sx={{display:'flex', justifyContent:'center', paddingTop:'20px'}}>
+      <div  className='box-coll'>
+
+      <div className='img' >
+<Box sx={{display:'flex', flexDirection:'row', alignItems:'center', width:'100%',  gap:'30px', marginLeft:{xs:'', md:'8%'}
+}}>
+<img src={ip} id='image-glob' 
+onClick={()=> document.getElementById('ip-field')?.scrollIntoView({behavior:'smooth'})}
+alt='img'/>
+<h2 style={{color:'white'}}>Introduction to IP to Address finder</h2>
+</Box>
+<Box sx={{width:'70%', display:'flex', textAlign:'start', marginLeft:{xs:'30%', md:'17%'}, padding:'3px', borderLeft:'3px solid white', color:'white'}}>
+  <p> An IP to address tool is a utility that maps an IP address to a physical or geographical location. It uses databases like GeoIP to provide details such as the country, city, region, ISP, or even approximate coordinates associated with an IP address. These tools are used for tasks like network troubleshooting, cybersecurity analysis, or location-based services. Accuracy varies, as IP addresses don’t always directly correlate to precise locations.
+
+Examples include online services like WhatIsMyIPAddress.com or IPinfo.io, which allow users to input an IP and retrieve location data. Some tools also offer APIs for developers to integrate IP geolocation into applications.</p>
+</Box>
+      </div>
+      </div>
+    </Box>
+    {/* <Box  sx={{
       display:'flex',
       flexDirection:'column',
       gap:'15px',
@@ -151,22 +250,36 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
       overflow:'auto',
       paddingBottom:'20px',
       
-   
       
+      
+      }}> */}
 
-    }}>
+
+  <Box sx={{display:'flex', flexDirection:'column', gap:'30px', justifyContent:'center', alignItems:'center', width:'100%', }}>
+<Box  data-animate='fade-up' sx={{width:'100%' , marginTop:'20px', maxWidth:'1350px'}}>
+  <div style={{
+    padding:'30px'
+  }}> 
+
+  <IPInfo />
+  </div>
+</Box>
+
+  
       <Box  sx={{
-    height:{xs:'100vh', md:'100vh'},
-    display:'flex',
-    flexDirection:'column',
-    gap:'20px'
+
+        display:'flex',
+        flexDirection:'column',
+        gap:'20px',
+        width:'100%',
+        maxWidth:'1300px'
+
   }}>
-<div >
-<div className='a'>
+<div  id='ip-field'>
+<div id='dns-search' ref={searchRef} className='a'>
   
     <div style={{alignContent:'center', justifyContent:'end', display:'flex', width:'100%'}}>
       
-      <Button sx={{alignItems: 'flex-start' }} onClick={handleOnClose} >❌</Button>
     </div>
 <div className='g'>
   <div className='b' style={{ gap:'5px', flexDirection:'column', alignItems:'center', justifyContent:'center',  backgroundColor:'white',  
@@ -228,8 +341,8 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
 <Box sx={{
   padding:'10px',
   width:'100%',
-  maxWidth:{xs:'300px', md:'800px'},
- 
+  maxWidth:{xs:'300px', md:'1300px'},
+  
   boxShadow:'rgba(0, 0, 0, 0.35) 0px 5px 15px',
   
 }}>
@@ -265,13 +378,13 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
       zoom={15}
       
       scrollWheelZoom={false}
-      style={{ height: '400px', width: '100%' }} // Fixed height for reliability
+      style={{ height: '400px', width: '100%' }} 
       >
       <FixMapSize />
       <TileLayer
         attribution='© OpenStreetMap'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+        />
       <Marker position={info.coords}>
         <Popup>
           {info.city}, {info.region}<br />
@@ -293,6 +406,7 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
                     </div>
                 ): null}
    
+                </Box>
 
    <Snackbar open={SnackbarOpen} autoHideDuration={3000} anchorOrigin={{vertical:'top', horizontal:'center'}} >
     <Alert onClose={()=>setSnackbarOpen(false)} severity={snackbarSeverity}>
@@ -301,7 +415,7 @@ const { data } = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/ipinfo
     </Alert>
    </Snackbar>
                 </Box>
-                </Box>
+                {/* </Box> */}
     </>
   );
 }

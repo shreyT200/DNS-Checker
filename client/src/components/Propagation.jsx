@@ -30,6 +30,9 @@ import {Fab, Tooltip} from '@mui/material'
 
 import {gsap} from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+
+
 export default function Propagation() {
   const [domain, setDomain] = useState('');
   const [result, setResult] = useState(null);
@@ -39,7 +42,6 @@ export default function Propagation() {
   const [SnackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('info');
 const [openModal, setOpenModal] = useState(false)
-const [openIP, setOpenIP] = useState(false);
  
 gsap.registerPlugin(ScrollTrigger)
 const bannerRef = useRef();
@@ -50,13 +52,13 @@ const fabRef = useRef();
     const ctx = gsap.context(()=>{
       const tl = gsap.timeline({defaults:{ease:'power3.out'}})
       if(bannerRef.current){
-        tl.from(bannerRef.current,{ y:-100, opacity:0, duration:0.6})
+        tl.from(bannerRef.current,{ y:-100, opacity:0, duration:0.9})
 
       }
       if(searchRef.current){
         tl.from(searchRef.current,{
           opacity:0,
-          scale:0.9,
+          scale:1.2,
           duration:0.5
         }, '>-0.2')
 
@@ -85,13 +87,7 @@ const fabRef = useRef();
   }, []);
 
 
-const openIpTool=()=>{
-  setDomain('');
-  setResult(null);
-  setRecordType('A');
-  setSnackbarOpen(false);
-  setOpenIP(true)
-}
+
 const check = async () => {
     if (!domain.trim()) {
       setSnackbarOpen(true);
@@ -116,12 +112,11 @@ const check = async () => {
       setLoading(false);
     }
   };
-const handleClose=()=>
-{
-  setOpenIP(false)
-}
+
   return (
     <>
+    <Box sx={{display:'flex', flexDirection:'column', gap:'30px', }}>
+
       {/* <div className='banner'>
         <Box sx={{
           display: 'flex',
@@ -130,22 +125,15 @@ const handleClose=()=>
           alignSelf: 'center',
           textAlign: 'center',
           color: 'white'
-        }}>
+          }}>
           <h1>DNS Propagation Checker</h1>
-        </Box>
-      </div> */}
-    <Box ref={bannerRef} backgroundColor= '#007BFF' color='white' sx={{display:'flex', flexDirection:'row', justifyContent:'space-between', width:'100%', }}>
-
-
-     <Typography  sx={{fontSize:{xs:'16px', md:'30px'}}}>DNS Propagation Checker</Typography>
+          </Box>
+          </div> */}
  
-   <button className='ip-btn' onClick={openIpTool}>IP to Address</button>
-     
-    </Box>
 <Tooltip title="Go to DNS Search" arrow>
   <Fab
   ref={fabRef}
-    color="error"
+  color="error"
     sx={{
       position: 'fixed',
       bottom: 24,
@@ -153,8 +141,8 @@ const handleClose=()=>
       zIndex: 2000,
     }}
     onClick={() => {
-    document.getElementById('dns-search')?.scrollIntoView({ behavior: 'smooth' });
-
+      document.getElementById('dns-search')?.scrollIntoView({ behavior: 'smooth' });
+      
     }}
   >
     <ArrowDownwardIcon />
@@ -181,22 +169,12 @@ const handleClose=()=>
       
       {/* for opening the ip tool */}
        
-        {openIP  && !openModal  &&(
-          <Box sx={{
-            display:'flex',
-            justifyContent:'center',
-            width:'100%',
-            
-          }}>
-
-          <IPAddress handleOnClose={handleClose}/>
-        </Box>
-        )}
+    
       
       
         {/* input filed button n select field flex container */}
 
-<div data-animate='fade-up' className='box-coll' style={{flex:'0 0 50%'}}>
+<div data-animate='fade-up' className='box-coll' >
 
   {/* <div style={{display:'flex', justifyContent:'space-between'}}> */}
   <div className='img'>
@@ -205,15 +183,19 @@ const handleClose=()=>
 <div style={{display:'flex', flexDirection:'row', alignItems:'center', width:"100%"}}>
 
 
-<img src={mag} alt='img'/>
+
+<img id='image-mag'  onClick={()=>
+document.getElementById('dns-search')?.scrollIntoView({behavior:'smooth'})
+}  src={mag} alt='img'/>
+
  <h2 style={{color:'white'}}>Introduction to DNS Propagation tool</h2>
 </div>
 
 
-<div style={{width:'70%', display:'flex', textAlign:'start',marginLeft:'22%', padding:'3px', borderLeft:'3px solid white', color:'white'}}>
+<Box sx={{width:'70%', display:'flex', textAlign:'start',marginLeft:{xs:'30%', md:'17%'}, padding:'3px', borderLeft:'3px solid white', color:'white'}}>
 
     <p>The DNS Propagation Tool is a web-based utility designed to assist users in monitoring and troubleshooting DNS-related issues. It provides real-time insights into DNS record propagation across global servers and checks if a domain or IP is listed on common blacklists. </p>
-</div>
+</Box>
 <br/>
  <br/>
  </div>
@@ -226,15 +208,13 @@ const handleClose=()=>
 
           </Box>
        
-        <Box data-animate='fade-up' sx={{width:'100%', display:'flex', justifyContent:'center', gap:'10px', flexDirection:{xs:'column', md:'row'} }}>
-<Box sx={{width:'100%'}}>
-  <IPInfo/>
-</Box>
+<Box sx={{width:'100%', display:'flex', justifyContent:'center'}}>
 
-        <Box sx={{width:'100%', maxWidth:'1300px', alignItems:'center', }} > 
+
+        <Box data-animate='fade-up' sx={{width:'100%', maxWidth:'1300px', alignItems:'center', }} > 
 
         <InfoPage />
-        </Box>
+</Box>
         </Box>
 {/* search field */}
         <div id='dns-search' ref={searchRef} style={{alignTtems: 'center'
@@ -250,7 +230,7 @@ sx={{
   flex:'0 0 50%',
   backgroundColor:'#007BFF',
   flexDirection:'column',
-  margin:"0 auto",
+  margin:'0 auto',
   justifyContent:'center',
   alignItems: 'center',
   borderRadius:'5px',
@@ -385,18 +365,18 @@ onChange={(e) => setRecordType(e.target.value)}
 
 {openModal && result.blacklist?.length > 0 && (
   <Box 
-    sx={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      height: '100vh',
-      width: '100vw',
-      backgroundColor: 'rgba(0,0,0,0.51)',
-      zIndex: 1300,
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
+  sx={{
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    height: '100vh',
+    width: '100vw',
+    backgroundColor: 'rgba(0,0,0,0.51)',
+    zIndex: 1300,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  }}
   >
     <Paper
       sx={{
@@ -410,7 +390,7 @@ onChange={(e) => setRecordType(e.target.value)}
         display: 'flex',
         flexDirection: 'column',
       }}
-    >
+      >
       {/* Close Button */}
       <Button
         onClick={() => setOpenModal(false)}
@@ -421,7 +401,7 @@ onChange={(e) => setRecordType(e.target.value)}
           fontSize: '18px',
           color: '#000',
         }}
-      >
+        >
         ❌
       </Button>
 
@@ -437,7 +417,7 @@ onChange={(e) => setRecordType(e.target.value)}
         <Table stickyHeader>
           <TableHead 
             
-          >
+            >
             <TableRow >
               <TableCell sx={{backgroundColor:'#FE791A'}} align='center'>IP</TableCell>
               <TableCell sx={{backgroundColor:'#FE791A'}} align='center'>Blacklist</TableCell>
@@ -471,7 +451,7 @@ onChange={(e) => setRecordType(e.target.value)}
                 
                 {/* map part */}
           
-{!openModal && !openIP &&(
+{!openModal &&  (
   <Box sx={{ width: { xs: '100%', md: '50%' } }}>
     {result && <Mapview data={result.Propagation} />}
   </Box>
@@ -491,11 +471,12 @@ onChange={(e) => setRecordType(e.target.value)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         TransitionComponent={Slide}
         TransitionProps={{ direction: 'down' }}
-      >
+        >
         <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
           {SnackbarMessage}
         </Alert>
       </Snackbar>
+        </Box>
     </>
   );
 }

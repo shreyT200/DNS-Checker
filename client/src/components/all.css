@@ -28,7 +28,8 @@
     height: 25px;
     padding: 5px;
     transition: 0.3s;
-    width: 250px;
+width: 100%;
+max-width: 1300px;
     border-radius: 5px;
     border: 1px solid black;
 }
@@ -106,7 +107,11 @@ transform: scale(1.1);
     .ip-btn{
         font-size: small;
     }
-  
+  #image-mag{
+    width: 100%;
+    max-width: 50px;  cursor: pointer;
+    transition: 0.3s ease-in-out;
+  }
 }
 
 .search-btn{
@@ -170,7 +175,7 @@ transform: scale(1.1);
     width: 100%;
     padding: 15px;
     flex-direction: column;
-    max-width: 900px;
+    max-width: 1300px;
     height: 100%;
     justify-content: center;
     background-color: #007bffe1;
@@ -208,11 +213,13 @@ border-radius: 5px;
     border: 1px solid black;
 
 }
-.img img{
+#image-mag{
    
-width: 200px; 
+width: 100%;
+max-width: 200px; 
 justify-self: center;
 margin-bottom: 5px;   
+cursor: pointer;
 }
 .domain-input, .select-domain{
     margin: 10px 0;
@@ -249,4 +256,23 @@ justify-content: flex-start;
 .head-ip-q1{
     padding-bottom: 10px;
 
+}
+#image-glob{
+    width: 100px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+#image-glob:hover{
+   transform: scale(1.1);
+}
+#image-domain:hover{
+   transform: scale(1.1);
+}
+#image-mag:hover{
+   transform: scale(1.1);
+}
+#image-domain{
+    width: 100px;
+      cursor: pointer;
+    transition: 0.3s ease-in-out;
 }

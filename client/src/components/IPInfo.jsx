@@ -7,6 +7,7 @@ export default function IPInfo() {
         color:'white',
         fontSize:'18px',
         borderRadius:'9px',
+        padding:'10px',
         display:'flex',
         gap:'10px'
 
@@ -33,36 +34,30 @@ export default function IPInfo() {
             </h3>
         </div>
         <p><b>Geolocation:</b>
-         </p><br/>
+         </p>
         <p>
 
          Helps identify the physical location of a server or user, useful for targeting content or analyzing traffic.
         </p><br/>
         <p><b> 
             Troubleshooting:</b> 
-            </p><br/>
+            </p>
             <p>
 
             Assists in diagnosing network issues by pinpointing the source of an IP address.
             </p><br/>
             
-        <p>
-          <b>  Security:</b>
-             </p><br/>
-                <p>
-
-             Enables tracking of suspicious activity or verifying the legitimacy of incoming connections.</p>
-                <p><br/>
+       <p>
            <b>     Business Intelligence:</b>
              </p>
-<br/>
+
                 <p>
                     Supports marketing efforts by providing data on visitor demographics.
                     </p> <br/>
 
              <p>
            <b>     Compliance:</b>
-             </p><br/>
+             </p>
                 <p>
 
                  Aids in ensuring data handling complies with regional regulations based on IP origins.
