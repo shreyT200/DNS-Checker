@@ -335,11 +335,11 @@ onChange={(e) => setRecordType(e.target.value)}
                   }}>
                     <Table>
                       <TableHead>
-                        <TableRow sx={{ backgroundColor: '#FE791A' }}>
-                          <TableCell align='center'><strong>Resolver</strong></TableCell>
-                          <TableCell align='center'><strong>Country</strong></TableCell>
-                          <TableCell align='center'><strong>IP</strong></TableCell>
-                          <TableCell align='center'><strong>Status</strong></TableCell>
+                        <TableRow sx={{ backgroundColor: '#FE791A', color:'white' }}>
+                          <TableCell align='center'sx={{color:'white'}}><strong>Resolver</strong></TableCell>
+                          <TableCell align='center'sx={{color:'white'}}><strong>Country</strong></TableCell>
+                          <TableCell align='center'sx={{color:'white'}}><strong>IP</strong></TableCell>
+                          <TableCell align='center'sx={{color:'white'}}><strong>Status</strong></TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>

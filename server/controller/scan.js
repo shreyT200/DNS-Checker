@@ -1,5 +1,4 @@
 const axios = require('axios');
-const { error } = require('console');
 const dns = require('dns').promises;
 
 
@@ -27,13 +26,25 @@ async function lookupTXT(name) {
   }
 }
 
+const RESOLVERS = [
+    {name:'Google', url:'https://dns.google/resolve'},
+    {name:'Cloudflare', url:'https://cloudflare-dns.com/dns-query'},
+    {name:'Quad9', url:'https://dns.quad9.net/dns-query'},
 
-
-
-
+];
 async function scanDomain(req, res){
     const domain = req.query.domain;
-    if(!domain) return res.status(400).json({error:"domain required"});
+    if(!domain) 
+        {return res.status(400).json({error:"domain required"});}
+
+const [aRec, mxRec, nsRec, txtRec] = await Promise.all([
+    timeResolve(()=> dns.resolve4(domain)),
+    timeResolve(()=> dns.resolve4(domain)),
+    timeResolve(()=> dns.resolve4(domain)),
+    timeResolve(()=> lookupTXT(domain)),
+
+])
+
 
     let mx =[];
     try{
@@ -62,12 +73,33 @@ async function scanDomain(req, res){
     } catch{
 
     }
+   const propagation = await Promise.all(
+    RESOLVERS.map(async ({name, url}) => {
+        try {
+            const resp = await axios.get(url, {
+                params: { name: domain, type: 'A' },
+                headers: { Accept: 'application/json' },
+            });
+            // Check if the DNS resolution was successful
+            const isOk = resp.data.Status === 0 && Array.isArray(resp.data.Answer) && resp.data.Answer.length > 0;
+            return { name, ok: isOk };
+        } catch {
+            return { name, ok: false };
+        }
+    })
+);
+
+    
+
+
+
+
     let mtaSts = null ;
     try{
         const stsTxt = await lookupTXT(`_mta-sts.${domain}`);
         if(stsTxt[0]?.startsWith('v=STSv1')){
             const policyUrl = `https://${domain}/.well-known/mta-sts.txt`;
-            const pol = await axios.get(policyUrl,{timeout:2000});
+            const pol = await axios.get(policyUrl,{timeout:4000});
             mtaSts = pol.data.substring(0, 500);
 
         }
@@ -75,6 +107,10 @@ async function scanDomain(req, res){
     catch{
 
     }
+
+
+
+
 return res.json({
     domain,
     mx: Array.isArray(mx) ?  mx.map(m =>m.exchange) : [],
@@ -82,7 +118,19 @@ return res.json({
     dmarc,
     dkim,
     mtaSts,
+    records:{
+        
+        A: aRec,
+        MX: mxRec,
+        NS: nsRec,
+        TXT: txtRec,
+    },
+    propagation,
+
 });
+
+
+
 }
 
 
