@@ -3,4 +3,4 @@
 3.'CNAME': it is used for whem you have different variation for same domain
 4. 'MX': it is used for knowing the hosting mail 
 5. 'NS': it is used for knowing the mail server 
-6. 'TXT' it is used for 
+6. 'TXT' it is used for text
