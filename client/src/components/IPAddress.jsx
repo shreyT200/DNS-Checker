@@ -5,7 +5,7 @@ import {
 } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import {TextField, Button, Box, Paper, Table, TableBody, TableCell, TableHead, TableContainer, TableRow } from '@mui/material'
+import {TextField, Button, Box, Paper, Table, TableBody, TableCell, TableHead, TableContainer, TableRow, Typography } from '@mui/material'
 import {Snackbar, Alert} from '@mui/material'
 import CircularProgress from '@mui/material/CircularProgress';
 import './all.css'
@@ -275,17 +275,17 @@ Examples include online services like WhatIsMyIPAddress.com or IPinfo.io, which 
         maxWidth:'1300px'
 
   }}>
-<div  id='ip-field'>
-<div id='dns-search' ref={searchRef} className='a'>
+<Box  id='ip-field'>
+<Box id='dns-search' ref={searchRef} className='a'>
   
-    <div style={{alignContent:'center', justifyContent:'end', display:'flex', width:'100%'}}>
+    <Box style={{alignContent:'center', justifyContent:'end', display:'flex', width:'100%'}}>
       
-    </div>
-<div className='g'>
-  <div className='b' style={{ gap:'5px', flexDirection:'column', alignItems:'center', justifyContent:'center',  backgroundColor:'white',  
+    </Box>
+<Box className='g'>
+  <Box className='b' style={{ gap:'5px', flexDirection:'column', alignItems:'center', justifyContent:'center',  backgroundColor:'white',  
    justifySelf:'center', borderRadius:'15px',marginTop:'10px'
   }}>
-  <h2 style={{textAlign:'center'}}>Enter IP Address</h2>
+  <Typography variant='h4' style={{textAlign:'center'}}>Enter IP Address</Typography>
      <br/>
    
       <input
@@ -301,18 +301,15 @@ Examples include online services like WhatIsMyIPAddress.com or IPinfo.io, which 
       onChange={e => setInputIp(e.target.value)}
       />
       <br/>
-      <Button onClick={()=>fetchInfo(inputIp)} sx={{
-        backgroundColor:'#FE791A',
-        color:'white',
-        height:'30px',
-        width:'100%',
+      <Button onClick={()=>fetchInfo(inputIp)} variant='outlined' sx={{
+      
         fontSize:{xs:'10px', md:'medium'}
       }}>Get IP Info</Button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      </div> 
-        </div>
-        </div>
-      </div>
+      </Box> 
+        </Box>
+        </Box>
+      </Box>
 
         
 {loading ? (
@@ -331,10 +328,11 @@ Examples include online services like WhatIsMyIPAddress.com or IPinfo.io, which 
         
     </Box>
       ): info ? (
-        <div className='f'>
+        <Box
+       className='f'>
          <div className='e'style={{height:'50px', alignContent:"center"}}>
 
-          <h1 style={{textAlign:'center', color:'	#FE791A'}}>Current User Ip: {clientIp}</h1>
+          <h1 style={{textAlign:'center', color:'balck'}}>Current User Ip: {clientIp}</h1>
          </div>
 
         <Box sx={{display:'flex', flexDirection:{xs:'row', md:'row'}, gap:'10px', padding:'5px', justifyContent:'center'}}>
@@ -403,7 +401,7 @@ Examples include online services like WhatIsMyIPAddress.com or IPinfo.io, which 
         </Box>
 </Box>
 
-                    </div>
+                    </Box>
                 ): null}
    
                 </Box>

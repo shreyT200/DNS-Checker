@@ -17,11 +17,8 @@ app.get('/api/ipinfo/:ip', async (req, res) => {
     const { ip } = req.params;
 
     const url = `https://ipinfo.io/${ip}?token=${token}`;
-    console.log(`👉 Fetching IP info for: ${ip}`);
-    console.log(`🌐 URL: ${url}`);
 
     const resp = await axios.get(url);
-    console.log("✅ Data received:", resp.data);
 
     res.json(resp.data);
   } catch (err) {
@@ -30,10 +27,6 @@ app.get('/api/ipinfo/:ip', async (req, res) => {
   }
 });
 
-// app.use(express.static(path.join(__dirname, './client/dist')));
 
-// app.get('*', (_req, res) =>
-//   res.sendFile(path.join(__dirname, './client/dist', 'index.html'))
-// );
 
 app.listen(PORT, () => console.log(`server connected to port: ${PORT}`));

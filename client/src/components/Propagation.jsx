@@ -117,18 +117,7 @@ const check = async () => {
     <>
     <Box sx={{display:'flex', flexDirection:'column', gap:'30px', }}>
 
-      {/* <div className='banner'>
-        <Box sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignSelf: 'center',
-          textAlign: 'center',
-          color: 'white'
-          }}>
-          <h1>DNS Propagation Checker</h1>
-          </Box>
-          </div> */}
+      
  
 <Tooltip title="Go to DNS Search" arrow>
   <Fab
@@ -155,19 +144,6 @@ const check = async () => {
 <Box sx={{ display:'flex', flexDirection:{xs:'column', md:'column'},width:'100%', alignItems:'center',justifyContent:'center', paddingTop:'10px',}}>
 
     
-      {/* <div className='body-content'> */}
-      
-        {/* <Box sx={{ display: 'flex', gap: '10px', mt: 5, justifyContent: 'end', flexWrap: 'wrap', flexDirection:'column' }}> */}
-        
-        {/* flex container */}
-        
-        {/* <Box sx={{display:'flex', flexDirection:{xs:'column', md:'row'}, justifyContent:'space-between', Padding:'12px', maxWidth:'400px'}}> */}
-
-         {/* ip button */}
-
-         {/* <button className='ip-btn' style={{backgroundColor:'#FE791A' ,color:'white', height:'30px', border:'none'}}  onClick={openIpTool}>IP Info Tool</button> */}
-      
-      {/* for opening the ip tool */}
        
     
       
@@ -176,7 +152,6 @@ const check = async () => {
 
 <div data-animate='fade-up' className='box-coll' >
 
-  {/* <div style={{display:'flex', justifyContent:'space-between'}}> */}
   <div className='img'>
 
   
